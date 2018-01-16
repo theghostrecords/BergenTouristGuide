@@ -1,2 +1,3 @@
 # INFO134
 Oblig - Klientprogrammering
+JOAKIM OG ØYVIND SKAL FÅ A XDDDDDDDDD
