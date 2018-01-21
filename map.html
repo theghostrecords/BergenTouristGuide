@@ -1,36 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
-  </head>
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var akvariet = {lat: 60.399776, lng: 5.303468};
-        var bryggen = {lat: 60.397625, lng: 5.324571};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: bryggen
-        });
-        var marker1 = new google.maps.Marker({
-          position: akvariet,
-          map: map
-        });
-        var marker2 = new google.maps.Marker({
-          position: bryggen,
-          map: map
-        })
-      }
-    </script>
+    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+    <script src="js/script.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
     </script>
+  </head>
+  <body onload="initMap()">
+    <div id="header-container">
+    <h1 class="center">My Google Maps Demo</h1>
+    </div>
+    <div id="map"></div>
   </body>
 </html>

@@ -1,11 +1,16 @@
 function initMap(){
-  var akvariet = {lat: 60.3996913, lng:5.3011823}
-  var map = new google.maps.Map(document.getElementByIs('map'), {
-    zoom: 4,
-    center: akvariet
+  var akvariet = {lat: 60.399776, lng: 5.303468};
+  var bryggen = {lat: 60.397625, lng: 5.324571};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: bryggen
   });
-  var marker = new google.maps.Marker({
-    position akvariet,
+  var marker1 = new google.maps.Marker({
+    position: akvariet,
     map: map
   });
+  var marker2 = new google.maps.Marker({
+    position: bryggen,
+    map: map
+  })
 }
