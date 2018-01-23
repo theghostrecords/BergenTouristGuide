@@ -89,12 +89,16 @@ body {
   font-family: "sofia";
 }
 
+.center:hover{
+  cursor: pointer;
+}
+
 #map {
   width: 100%;
   height: 400px;
   background-color: grey;
   position: relative;
-  top: 100px;
+  top: 150px;
   left: auto;
   border-radius: 5px;
 }

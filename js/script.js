@@ -6,7 +6,7 @@ function initMap(){
   var fisketorget = {lat: 60.394942, lng: 5.325351};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
-    center: fisketorget
+    center: {lat: 60.389416, lng: 5.329642}
   });
   var marker1 = new google.maps.Marker({
     position: akvariet,
