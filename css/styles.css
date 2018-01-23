@@ -1,11 +1,63 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Sofia");
-
 body {
   background: #4e54c8;
 }
 
+.menu {
+  display: inline-block;
+  transform: skewY(-1deg);
+  transform-origin: 0;
+  overflow: hidden;
+  background-color: black;
+  top: 88px;
+  left: 0px;
+  width: 100%;
+  position: fixed;
+  height: 40px;
+}
+
+.menu ul {
+  list-style: none;
+  background-color: #444;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  float: left;
+  border: 1px solid;
+}
+
+.menu a {
+  display: block;
+  padding: 15px 25px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #424bf4;
+  border: none;
+  box-shadow: 0 9px #999;
+  font-family: "Trebuchet MS";
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background-color: #252b96
+}
+
+.menu a:active {
+  background-color: #252b96;
+  box-shadow: 0 5px #666;
+  transform: translateY(1px);
+}
+
+/*
 .button {
+  display: block;
   padding: 15px 25px;
   font-size: 24px;
   text-align: center;
@@ -16,7 +68,6 @@ body {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
-  width: 40%;
   margin-left: 30%;
   margin-right: 30%;
   font-family: "roboto";
@@ -31,6 +82,7 @@ body {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+*/
 
 .center {
   text-align: center;
@@ -43,7 +95,7 @@ body {
   background-color: grey;
   position: relative;
   top: 100px;
-  left:auto;
+  left: auto;
   border-radius: 5px;
 }
 
@@ -52,12 +104,7 @@ body {
   background-size: 72%;
 }
 
-#list {
-  position: relative;
-  top: 100px;
-}
-
-#header-container {
+.header-container {
   color: #DFE2DB;
   width: 100%;
   position: fixed;
