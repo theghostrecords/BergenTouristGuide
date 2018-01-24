@@ -55,35 +55,6 @@ body {
   transform: translateY(1px);
 }
 
-/*
-.button {
-  display: block;
-  padding: 15px 25px;
-  font-size: 24px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #424bf4;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-  margin-left: 30%;
-  margin-right: 30%;
-  font-family: "roboto";
-}
-
-.button:hover {
-  background-color: #252b96
-}
-
-.button:active {
-  background-color: #252b96;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-*/
-
 .center {
   text-align: center;
   font-family: "sofia";
