@@ -91,3 +91,14 @@ body {
   transform: skewY(-1deg);
   transform-origin: 0;
 }
+
+.aktivitet {
+  font-family: "Trebuchet MS";
+  color: #fff;
+  top: 150px;
+  position: relative;
+}
+
+.aktivitet h1 {
+  font-family: "sofia";
+}
