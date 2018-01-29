@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
-    <script src="js/script.js"></script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
-    </script>
-  </head>
-  <body onload="initMap()">
-    <div class="header-container">
+
+<head>
+  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <script src="js/script.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
+  </script>
+</head>
+
+<body onload="initMap()">
+  <div class="header-container">
     <h1 class="center" onclick="location.href='index.html'">Kart over Bergen</h1>
-    </div>
-    <div class="menu">
+  </div>
+  <nav class="menu">
     <ul>
       <li>
         <a href="index.html"> Hjem </a>
@@ -25,7 +26,8 @@
         </a>
       </li>
     </ul>
-    </div>
-    <div id="map"></div>
-  </body>
+  </nav>
+  <div id="map"></div>
+</body>
+
 </html>
