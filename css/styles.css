@@ -109,13 +109,21 @@ body {
   top: 200px;
   margin-left: 100px;
   position: relative;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.content h4 {
   font-size: 30px;
-  font-family: "Trebuchet MS";
+}
+
+.content p {
+  font-size: 14px;
 }
 
 @media (max-width: 600px) {
   .menu a {
-    font-size:10px;
+    font-size: 10px;
     padding: 20px 25px;
   }
 }
