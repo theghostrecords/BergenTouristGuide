@@ -3,6 +3,10 @@ body {
   background: #303030;
 }
 
+#head-wrapper {
+  position: fixed;
+}
+
 .menu {
   display: inline-block;
   transform: skewY(-1deg);
@@ -95,14 +99,37 @@ body {
 }
 
 .aktivitet {
+  display: flex;
+  flex-direction: column;
   font-family: "Trebuchet MS";
   color: #fff;
-  top: 150px;
-  position: relative;
+  margin-top: 150px;
 }
 
 .aktivitet h1 {
   font-family: "sofia";
+}
+
+.aktiv-element {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.aktiv-element article {
+  margin-left: 20px;
+  margin-top: 60px;
+}
+
+.line {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  border: none;
+  color: white;
+  height: 1px;
+  background: black;
+  background: linear-gradient(125deg, #191919, #424bf4);
 }
 
 .index-content {
