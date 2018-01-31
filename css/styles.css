@@ -1,3 +1,4 @@
+/*Document by Øyvind Skeie Liland*/
 @import url("https://fonts.googleapis.com/css?family=Sofia");
 body {
   background: #303030;
@@ -31,6 +32,7 @@ body {
   border-bottom-color: black;
 }
 
+/*.menu a by Joakim Moss Grutle*/
 .menu a {
   display: block;
   padding: 15px 25px;
