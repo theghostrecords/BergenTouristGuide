@@ -3,10 +3,6 @@ body {
   background: #303030;
 }
 
-#head-wrapper {
-  position: fixed;
-}
-
 .menu {
   display: inline-block;
   transform: skewY(-1deg);
@@ -69,22 +65,6 @@ body {
   cursor: pointer;
 }
 
-#map {
-  width: 100%;
-  height: 450px;
-  overflow: visible;
-  background-color: grey;
-  position: relative;
-  top: 140px;
-  border-radius: 5px;
-}
-
-#index-body {
-  background-image: url("../img/Bakgrunn.jpg");
-  background-repeat: no-repeat;
-  background-position: 0px 100px;
-}
-
 .header-container {
   color: #DFE2DB;
   width: 100%;
@@ -96,61 +76,6 @@ body {
   display: inline-block;
   transform: skewY(-1deg);
   transform-origin: 0;
-}
-
-.aktivitet {
-  display: flex;
-  flex-direction: column;
-  font-family: "Trebuchet MS";
-  color: #fff;
-  margin-top: 150px;
-}
-
-.aktivitet h1 {
-  font-family: "sofia";
-}
-
-.aktiv-element {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.aktiv-element article {
-  margin-left: 20px;
-  margin-top: 60px;
-}
-
-.line {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: block;
-  border: none;
-  color: white;
-  height: 1px;
-  background: black;
-  background: linear-gradient(125deg, #191919, #424bf4);
-}
-
-.index-content {
-  background: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-.index-content h4 {
-  margin-top: 0px;
-  text-align: center;
-  font-size: 30px;
-}
-
-.index-content p {
-  font-size: 16px;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 @media (max-width: 600px) {
