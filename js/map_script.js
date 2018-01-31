@@ -1,3 +1,4 @@
+//Script by Joakim Moss Grutle
 function initMap(){
   var akvariet = {lat: 60.399776, lng: 5.303468};
   var bryggen = {lat: 60.397625, lng: 5.324571};
