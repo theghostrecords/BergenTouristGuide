@@ -1,0 +1,9 @@
+#map {
+  width: 100%;
+  height: 450px;
+  overflow: visible;
+  background-color: grey;
+  position: relative;
+  top: 140px;
+  border-radius: 5px;
+}

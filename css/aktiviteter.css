@@ -1,0 +1,35 @@
+.aktivitet {
+  display: flex;
+  flex-flow: column wrap;
+  font-family: "Trebuchet MS";
+  color: #fff;
+  margin-top: 150px;
+}
+
+.aktivitet h1 {
+  font-family: "sofia";
+}
+
+.aktiv-element {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+}
+
+.aktiv-element article {
+  width: 600px;
+  margin-top: 60px;
+  margin-left: 20px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.line {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  border: none;
+  color: white;
+  height: 1px;
+  background: black;
+  background: linear-gradient(125deg, #191919, #424bf4);
+}
