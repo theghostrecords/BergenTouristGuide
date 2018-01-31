@@ -29,3 +29,4 @@ function initMap(){
     map: map
   })
 }
+  console.log("Ran map_script.js");
