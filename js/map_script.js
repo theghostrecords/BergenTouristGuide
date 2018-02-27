@@ -1,41 +1,39 @@
 var toiletArr = new Array;
 var markers = new Array;
 
-//Script by Joakim Moss Grutle
+//Markers on google maps - top half by Joakim Moss Grutle
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
+    zoom: 14,
     center: {
-      lat: 60.389416,
-      lng: 5.329642
+      lat: 60.3928444,
+      lng: 5.3239541
     }
   });
-  var lat;
-  var lng;
 
   for (var i = 0; i < toiletArr.length; i++) {
-    for (var entry in toiletArr[i]) {
-      var arr = toiletArr[i];
-
-      if (arr[entry].key === "latitude")
-        lat = Number(arr[entry].value);
-      if (arr[entry].key === "longitude")
-        lng = Number(arr[entry].value);
-    }
-    var pos = {
-      lat,
-      lng
-    };
-
     markers[i] = new google.maps.Marker({
-      position: pos,
+      position: getLatLng(i),
       map: map,
       label: (i + 1).toString()
     })
   }
 }
 
+// Get latitude and longitude from toiletArr
+function getLatLng(i) {
+  var lat;
+  var lng;
+  for (var entry in toiletArr[i]) {
+    var arr = toiletArr[i];
 
+    if (arr[entry].key === "latitude")
+      lat = Number(arr[entry].value);
+    if (arr[entry].key === "longitude")
+      lng = Number(arr[entry].value);
+  }
+  return {lat, lng};
+}
 
 //From here and down - By Øyvind Skeie liland
 function keyValue(k, v) {
