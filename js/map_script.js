@@ -1,4 +1,5 @@
 var toiletArr = new Array;
+var markers = new Array;
 
 //Script by Joakim Moss Grutle
 function initMap() {
@@ -9,7 +10,32 @@ function initMap() {
       lng: 5.329642
     }
   });
+  var lat;
+  var lng;
+
+  for (var i = 0; i < toiletArr.length; i++) {
+    for (var entry in toiletArr[i]) {
+      var arr = toiletArr[i];
+
+      if (arr[entry].key === "latitude")
+        lat = Number(arr[entry].value);
+      if (arr[entry].key === "longitude")
+        lng = Number(arr[entry].value);
+    }
+    var pos = {
+      lat,
+      lng
+    };
+
+    markers[i] = new google.maps.Marker({
+      position: pos,
+      map: map,
+      label: (i + 1).toString()
+    })
+  }
 }
+
+
 
 //From here and down - By Øyvind Skeie liland
 function keyValue(k, v) {
@@ -39,7 +65,7 @@ function readJSON() {
       if (entry === "plassering")
         addToList(value);
     }
-    toiletArr.push("toilet" + i, arr);
+    toiletArr.push(arr);
   }
 }
 console.log("Ran map_script.js");
