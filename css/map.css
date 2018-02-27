@@ -7,4 +7,15 @@
   position: relative;
   top: 140px;
   border-radius: 5px;
+  display: none;
+}
+
+#toilets {
+  color:white;
+  font-family: "Trebuchet MS";
+  padding: 5px;
+}
+
+#list li {
+  color: white;
 }
