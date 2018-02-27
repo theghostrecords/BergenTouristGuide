@@ -13,7 +13,7 @@
   </script>
 </head>
 
-<body onload="initMap(); readJSON();">
+<body onload=" readJSON(); initMap();">
   <div id="head-wrapper">
     <div class="header-container">
       <h1 class="center" onclick="location.href='index.html'">Kart over Bergen</h1>
@@ -34,10 +34,12 @@
       </ul>
     </nav>
   </div>
-  <div id="map"></div>
-  <div id="toilets">
-    <h3>Toaletter i Bergen</h3>
-    <ol id="list"></ol>
+  <div id="content">
+    <div id="map"></div>
+    <div id="toilets">
+      <h3>Toaletter i Bergen</h3>
+      <ol id="list"></ol>
+    </div>
   </div>
 </body>
 

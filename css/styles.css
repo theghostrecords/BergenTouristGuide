@@ -4,10 +4,6 @@ body {
   background: #303030;
 }
 
-#head-wrapper {
-  margin-bottom: 150px;
-}
-
 .menu {
   display: inline-block;
   transform: skewY(-1deg);
