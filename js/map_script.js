@@ -15,7 +15,7 @@ function initMap() {
     markers[i] = new google.maps.Marker({
       position: getLatLng(i),
       map: map,
-      label: (i + 1).toString()
+      label: getId(i)
     })
   }
 }
@@ -35,6 +35,14 @@ function getLatLng(i) {
   return {lat, lng};
 }
 
+//Get id from toiletArr
+function getId(i){
+  for (var entry in toiletArr[i]) {
+    var arr = toiletArr[i];
+    if (arr[entry].key === "id")
+      return arr[entry].value;
+    }
+}
 //From here and down - By Øyvind Skeie liland
 function keyValue(k, v) {
   return {
