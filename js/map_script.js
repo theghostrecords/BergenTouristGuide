@@ -1,33 +1,45 @@
+var toiletArr = new Array;
+
 //Script by Joakim Moss Grutle
-function initMap(){
-  var akvariet = {lat: 60.399776, lng: 5.303468};
-  var bryggen = {lat: 60.397625, lng: 5.324571};
-  var floyen = {lat: 60.398801, lng: 5.345680};
-  var ulriken = {lat: 60.377952, lng: 5.386695};
-  var fisketorget = {lat: 60.394942, lng: 5.325351};
+function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
-    center: {lat: 60.389416, lng: 5.329642}
+    center: {
+      lat: 60.389416,
+      lng: 5.329642
+    }
   });
-  var marker1 = new google.maps.Marker({
-    position: akvariet,
-    map: map
-  });
-  var marker2 = new google.maps.Marker({
-    position: bryggen,
-    map: map
-  })
-  var marker3 = new google.maps.Marker({
-    position: floyen,
-    map: map
-  })
-  var marker4 = new google.maps.Marker({
-    position: ulriken,
-    map: map
-  })
-  var marker5 = new google.maps.Marker({
-    position: fisketorget,
-    map: map
-  })
 }
-  console.log("Ran map_script.js");
+
+//From here and down - By Øyvind Skeie liland
+function keyValue(k, v) {
+  return {
+    key: k,
+    value: v
+  };
+}
+
+// Helper function to add list element to the ordered list
+function addToList(val) {
+  var ol = document.getElementById('list');
+  var toiletEntry = document.createElement('li');
+  toiletEntry.appendChild(document.createTextNode(val));
+  ol.appendChild(toiletEntry);
+}
+
+// Read JSON file and add to array
+function readJSON() {
+  var json = JSON.parse(data)[0];
+
+  for (var i = 0; i < json.entries.length; i++) {
+    var arr = new Array;
+    for (var entry in json.entries[i]) {
+      var value = json.entries[i][entry];
+      arr.push(keyValue(entry, value));
+      if (entry === "plassering")
+        addToList(value);
+    }
+    toiletArr.push("toilet" + i, arr);
+  }
+}
+console.log("Ran map_script.js");
