@@ -1,9 +1,10 @@
+/*Document by Joakim Moss Grutle*/
 var toiletArr = new Array;
 var markers = new Array;
-var advancedSearchRegex = /^\?freeSearch=((\w\&)|(\w))+/
+var advancedSearchRegex = /^\?freeSearch=((\w\=\w)|(\&\w\=on))+/
 var advancedSearchArray = location.href.match(advancedSearchRegex);
 
-//Markers on google maps - top half by Joakim Moss Grutle
+//Markers on google maps
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,

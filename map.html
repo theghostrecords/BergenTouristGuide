@@ -39,12 +39,12 @@
     <div id="map"></div>
     <div id="searchBox">
       <h3>Toaletter i Bergen</h3>
-      <form id="searchToilets" onsubmit="return false;">
+      <form id="searchToilets">
         <input type="text" name="freeSearch" placeholder="søk adresse eller navn..." />
         <button type="submit">Søk</button>
         <p onclick="document.getElementById('advancedSearch').style.visibility='visible'">Avansert søk</p>
         <div id="advancedSearch" style="visibility:hidden">
-          <form id="advSearchForm" onsubmit="return false">
+          <form id="advSearchForm">
             <label>Kjønn:</label>
             <select name="kjonn">
               <option value="herre">Herre</option>
