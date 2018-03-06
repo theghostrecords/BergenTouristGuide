@@ -1,4 +1,5 @@
 /*Document by Øyvind Skeie Liland*/
+
 .aktivitet {
   display: flex;
   flex-flow: column wrap;
@@ -13,7 +14,6 @@
 
 .aktiv-element {
   display: flex;
-  flex-flow: row wrap;
   flex-direction: row;
 }
 
@@ -33,4 +33,19 @@
   height: 1px;
   background: black;
   background: linear-gradient(125deg, #191919, #424bf4);
+}
+
+@media (max-width: 900px) {
+  .aktiv-element {
+    flex-flow: column;
+  }
+  .aktiv-element article {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .aktiv-element img {
+    width: 100%;
+    object-fit: cover;
+  }
 }
