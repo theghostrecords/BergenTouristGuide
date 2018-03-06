@@ -1,5 +1,7 @@
 var toiletArr = new Array;
 var markers = new Array;
+var advancedSearchRegex = /^\?freeSearch=((\w\&)|(\w))+/
+var advancedSearchArray = location.href.match(advancedSearchRegex);
 
 //Markers on google maps - top half by Joakim Moss Grutle
 function initMap() {
@@ -15,7 +17,7 @@ function initMap() {
     markers[i] = new google.maps.Marker({
       position: getLatLng(i),
       map: map,
-      label: getId(i)
+      label: (i + 1).toString()
     })
   }
 }
@@ -32,17 +34,56 @@ function getLatLng(i) {
     if (arr[entry].key === "longitude")
       lng = Number(arr[entry].value);
   }
-  return {lat, lng};
+  return {
+    lat,
+    lng
+  };
 }
 
-//Get id from toiletArr
-function getId(i){
+//Get entry from toiletArr
+function getEntry(s, i) {
   for (var entry in toiletArr[i]) {
     var arr = toiletArr[i];
-    if (arr[entry].key === "id")
+    if (arr[entry].key === s)
       return arr[entry].value;
-    }
+  }
 }
+
+function advancedSearch() {
+  var searchCriteria = searchCrit();
+  for (criteria in advancedSearchArray) {
+    if (criteria === "herre")
+      searchCriteria.gender = true
+    if (criteria === "kvinne")
+      searchCriteria.gender = true
+    if (criteria === "rullestol")
+      searchCriteria.wheelChair = true
+    if (criteria === "aapenNaa")
+      searchCriteria.openNow = true
+    if (criteria === "aapenMellom")
+      searchCriteria.openBetween = true;
+    if (criteria === "maksPris")
+      searchCriteria.maximumPrice = true
+    if (criteria === "gratis")
+      searchCriteria.free = true;
+    if (criteria === "stelleRom")
+      searchCriteria.nursery = true;
+  }
+}
+
+//Function that returns an object for searching
+function searchCrit() {
+  return {
+    gender: false,
+    free: false,
+    openNow: false,
+    openBetween: false,
+    wheelChair: false,
+    nursery: false,
+    maximumPrice: false
+  };
+}
+
 //From here and down - By Øyvind Skeie liland
 function keyValue(k, v) {
   return {
@@ -75,3 +116,4 @@ function readJSON() {
   }
 }
 console.log("Ran map_script.js");
+console.log(advancedSearchArray);
