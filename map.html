@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title> Kart over Bergen </title>
+  <title> Toaletter i Bergen </title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
   <link rel="stylesheet" href="css/map.css" type="text/css" />
@@ -34,11 +34,40 @@
       </ul>
     </nav>
   </div>
+  <!-- By Øyvind Skeie Liland -->
   <div id="content">
     <div id="map"></div>
-    <div id="toilets">
+    <div id="searchBox">
       <h3>Toaletter i Bergen</h3>
-      <ol id="list"></ol>
+      <form id="searchToilets" onsubmit="return false;">
+        <input type="text" name="freeSearch" placeholder="søk adresse eller navn..." />
+        <button type="submit">Søk</button>
+        <p onclick="document.getElementById('advancedSearch').style.visibility='visible'">Avansert søk</p>
+        <div id="advancedSearch" style="visibility:hidden">
+          <form id="advSearchForm" onsubmit="return false">
+            <label>Kjønn:</label>
+            <select name="kjonn">
+              <option value="herre">Herre</option>
+              <option value="kvinne">Kvinne</option>
+            </select>
+            <label>Rullestol:</label>
+            <input type="checkbox" name="rullestol">
+            <label>Åpen nå:</label>
+            <input type="checkbox" name="aapenNaa">
+            <label>Stellerom:</label>
+            <input type="checkbox" name="stellerom">
+            <label>Gratis:</label>
+            <input type="checkbox" name="gratis">
+            <label>Åpen klokken:</label>
+            <input type="text" name="aapen">
+            <label>maksPris:</label>
+            <input type="text" name="maksPris">
+          </form>
+        </div>
+      </form>
+      <div id="toilets">
+        <ol id="list"></ol>
+      </div>
     </div>
   </div>
 </body>
