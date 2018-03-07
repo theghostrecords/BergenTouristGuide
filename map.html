@@ -39,32 +39,36 @@
     <div id="map"></div>
     <div id="searchBox">
       <h3>Toaletter i Bergen</h3>
-      <form id="searchToilets" onsubmit="return false;">
-        <input type="text" name="freeSearch" placeholder="søk adresse eller navn..." />
-        <button type="submit">Søk</button>
-        <p onclick="document.getElementById('advancedSearch').style.visibility='visible'">Avansert søk</p>
-        <div id="advancedSearch" style="visibility:hidden">
-          <form id="advSearchForm" onsubmit="return false">
-            <label>Kjønn:</label>
-            <select name="kjonn">
+      <div id="search">
+        <form id="searchToilets">
+          <input type="text" name="freeSearch" placeholder="søk adresse eller navn..." />
+          <button type="submit">Søk</button>
+          <br/>
+          <p onclick="document.getElementById('advancedSearch').style.visibility='visible'">Avansert søk</p>
+          <div id="advancedSearch" style="visibility:hidden">
+            <form id="advSearchForm">
+              <label>Kjønn:</label>
+              <select name="kjonn">
+              <option disabled selected value> Velg kjønn</option>
               <option value="herre">Herre</option>
               <option value="kvinne">Kvinne</option>
             </select>
-            <label>Rullestol:</label>
-            <input type="checkbox" name="rullestol">
-            <label>Åpen nå:</label>
-            <input type="checkbox" name="aapenNaa">
-            <label>Stellerom:</label>
-            <input type="checkbox" name="stellerom">
-            <label>Gratis:</label>
-            <input type="checkbox" name="gratis">
-            <label>Åpen klokken:</label>
-            <input type="text" name="aapen">
-            <label>maksPris:</label>
-            <input type="text" name="maksPris">
-          </form>
-        </div>
-      </form>
+              <label>Rullestol:</label>
+              <input type="checkbox" name="rullestol">
+              <label>Åpen nå:</label>
+              <input type="checkbox" name="aapenNaa">
+              <label>Stellerom:</label>
+              <input type="checkbox" name="stellerom">
+              <label>Gratis:</label>
+              <input type="checkbox" name="gratis">
+              <label>Åpen klokken:</label>
+              <input type="text" name="aapen">
+              <label>maksPris:</label>
+              <input type="text" name="maksPris">
+            </form>
+          </div>
+        </form>
+      </div>
       <div id="toilets">
         <ol id="list"></ol>
       </div>

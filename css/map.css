@@ -30,12 +30,19 @@ h3 {
 
 #searchBox {
   border: 0.5px solid white;
+  width: 100%;
+  height: 50%;
+}
+
+#search {
+  width: 100%;
 }
 
 #toilets {
   color: white;
   font-family: "Trebuchet MS";
   padding: 5px;
+  width: 100%;
 }
 
 
@@ -43,35 +50,32 @@ h3 {
   color: white;
 }
 
-#searchToilets {
-  width: 100%;
-  height: 35px;
-}
-
 #searchToilets p {
   color:white;
   font-size: 20px;
-  margin: 5px;
   text-decoration: underline;
 }
 
+#searchToilets {
+  width: 100%;
+}
 #searchToilets p:hover {
   cursor: pointer;
 }
 
 #searchToilets input[type="text"] {
   font-size: 20px;
-  width: 25%;
-  height: 100%;
+  width: 50%;
+  height: 125%;
   float: left;
 }
 
 #searchToilets button {
   font-size: 20px;
-  width: 5%;
-  height: 117%;
-  float: left;
+  width: 10%;
+  height: 115%;
   border: 0;
+  float:left;
 }
 
 #searchToilets button:hover {
@@ -87,20 +91,18 @@ h3 {
 
 #advancedSearch {
   color:white;
-  display: inline;
-}
-
-#advancedSearch input {
-  display: inline-block;
 }
 
 #advancedSearch input[type="text"] {
   font-size: 10px;
   width: 7%;
-  height: 50%;
   float:none;
 }
 
 #advancedSearch label {
     text-align: left;
+}
+
+@media (max-width:600px)  {
+
 }
