@@ -1,10 +1,12 @@
-/*Document by Øyvind Skeie Liland*/
-body {
-  background-image: url("../img/Bakgrunn.jpg");
-  background-repeat: no-repeat;
-  background-position: 0px 100px;
-  background-size: 140%;
-  object-fit: cover;
+/*Document by Øyvind Skeie Liland */
+body{
+  overflow: hidden;
+}
+
+img{
+  object-fit: contain;
+  margin-top: 100px;
+  width: 150%;
 }
 
 .index-content {
@@ -27,10 +29,21 @@ body {
 
 .index-content p {
   font-size: 16px;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-@media (max-width: 500) {
-  
+/*Added by Joakim Moss Grutle*/
+@media (max-width: 675px) {
+  .index-content{
+    position: static;
+  }
+
+  .index-content h4 {
+    font-size: 25px;
+  }
+
+  .index-content p {
+    font-size: 12px;
+  }
 }
