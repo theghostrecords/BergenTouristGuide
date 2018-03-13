@@ -106,13 +106,20 @@ function advancedSearch() {
     var arr = new Array;
 
     for (var toilet in toiletArr) {
-      var listToilet = false;
+      var listToilet = true;
       for(var crit in searchCriteria) {
         if(searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet);
+          if(entry === undefined || entry === "" || entry === "NULL") {
+            listToilet = false;
+          }
         }
       }
+      if(listToilet)
+        arr.push(toiletArr[toilet]);
     }
+    toiletArr = arr;
+    console.log(arr);
   }
 }
 
