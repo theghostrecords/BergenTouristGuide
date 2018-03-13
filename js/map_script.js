@@ -1,7 +1,7 @@
 /*Document by Joakim Moss Grutle*/
 var toiletArr = new Array;
 var markers = new Array;
-var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.\:]*&*)+)/;
+var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.]*&*)+)/;
 var advancedSearchArray = location.href.match(advancedSearchRegex);
 var advancedSearchArray = advancedSearchArray[1].split("&");
 var searchCriteria;
@@ -57,31 +57,62 @@ function advancedSearch() {
   for (i in advancedSearchArray) {
     splitArray = advancedSearchArray[i].split("=");
     if (splitArray[0] === "kjonn" && splitArray[1] === "herre")
-      searchCriteria.gender = "herre";
+      searchCriteria.herre = true;
     if (splitArray[0] === "kjonn" && splitArray[1] === "kvinne")
-      searchCriteria.gender = "dame";
+      searchCriteria.dame = true;
     if (splitArray[0] === "rullestol" && splitArray[1] !== "")
-      searchCriteria.wheelChair = true;
-    if (splitArray[0] === "aapen" && splitArray[1] !== "")
-      searchCriteria.open = splitArray[1];
+      searchCriteria.rullestol = true;
     if (splitArray[0] === "maksPris" && splitArray[1] !== "")
-      searchCriteria.maximumPrice = splitArray[1];
+      searchCriteria.pris = splitArray[1];
     if (splitArray[0] === "gratis" && splitArray[1] !== "")
-      searchCriteria.free = true;
+      searchCriteria.gratis = true;
     if (splitArray[0] === "stellerom" && splitArray[1] !== "")
-      searchCriteria.nursery = true;
+      searchCriteria.stellerom = true;
+    if (splitArray[0] === "plassering" && splitArray[1] !== "")
+      searchCriteria.stellerom = splitArray[1];
+    /*
+    if (splitArray[0] === "aapen" && splitArray[1] !== ""){
+      var crtDate = new Date();
+      var dayOfWeek = crtDate.getDay();
+      if()
+        dayOfWeek++;
+      if(dayOfWeek < 5 || dayOfWeek > 6)
+        searchCriteria.tid_hverdag = splitArray[1];
+      else if(dayOfWeek === 5)
+        searchCriteria.tid_sondag = splitArray[1];
+      else
+        searchCriteria.tid_lordag = splitArray[1];
+    }
+    if (splitArray[0] === "aapenNaa" && splitArray[1] !== ""){
+      var crtDate = Date.now();
+      if()
+        dayOfWeek++;
+      if(dayOfWeek < 5 || dayOfWeek > 6)
+        searchCriteria.tid_hverdag = splitArray[1];
+      else if(dayOfWeek === 5)
+        searchCriteria.tid_sondag = splitArray[1];
+      else
+        searchCriteria.tid_lordag = splitArray[1];
+    }*/
   }
 }
 
 //Function that returns an object for searching
 function searchCrit() {
   return {
-    gender: false,
-    free: false,
-    open: false,
-    wheelChair: false,
-    nursery: false,
-    maximumPrice: false
+    herre : false,
+    tid_sondag : false,
+    pissoir_only : false,
+    stellerom : false,
+    tid_hverdag : false,
+    plassering : false,
+    tid_lordag : false,
+    rullestol : false,
+    adresse : false,
+    pris : false,
+    id : false,
+    place : false,
+    dame : false,
   };
 }
 
