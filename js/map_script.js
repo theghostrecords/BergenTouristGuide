@@ -53,6 +53,7 @@ function getEntry(s, i) {
 }
 
 function advancedSearch() {
+  readJSON();
   searchCriteria = searchCrit();
   for (i in advancedSearchArray) {
     splitArray = advancedSearchArray[i].split("=");
@@ -70,6 +71,24 @@ function advancedSearch() {
       searchCriteria.free = true;
     if (splitArray[0] === "stellerom" && splitArray[1] !== "")
       searchCriteria.nursery = true;
+  }
+  var advSearch = false;
+  for (crit in searchCriteria) {
+    if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
+      advSearch = true;
+    }
+
+  if (advSearch) {
+    var arr = new Array;
+
+    for (var toilet in toiletArr) {
+      var listToilet = false;
+      for(var crit in searchCriteria) {
+        if(searchCriteria[crit] !== false) {
+          var entry = getEntry(crit, toilet);
+        }
+      }
+    }
   }
 }
 
