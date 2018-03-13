@@ -100,22 +100,28 @@ function advancedSearch() {
   for (crit in searchCriteria) {
     if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
       advSearch = true;
-    }
+  }
 
   if (advSearch) {
     var arr = new Array;
 
     for (var toilet in toiletArr) {
       var listToilet = true;
-      for(var crit in searchCriteria) {
-        if(searchCriteria[crit] !== false) {
+      for (var crit in searchCriteria) {
+        if (searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet);
-          if(entry === undefined || entry === "" || entry === "NULL") {
+          if (entry === undefined || entry === "" || entry === "NULL") {
             listToilet = false;
+          }
+          // if herre === NULL && pissoir === 1 => Toalett for herrer
+          if (crit === "herre" && entry == "NULL") {
+            entry = getEntry("pissoir_only", toilet);
+            if (entry === "1")
+              listToilet = true;
           }
         }
       }
-      if(listToilet)
+      if (listToilet)
         arr.push(toiletArr[toilet]);
     }
     toiletArr = arr;
@@ -126,19 +132,19 @@ function advancedSearch() {
 //Function that returns an object for searching
 function searchCrit() {
   return {
-    herre : false,
-    tid_sondag : false,
-    pissoir_only : false,
-    stellerom : false,
-    tid_hverdag : false,
-    plassering : false,
-    tid_lordag : false,
-    rullestol : false,
-    adresse : false,
-    pris : false,
-    id : false,
-    place : false,
-    dame : false,
+    herre: false,
+    tid_sondag: false,
+    pissoir_only: false,
+    stellerom: false,
+    tid_hverdag: false,
+    plassering: false,
+    tid_lordag: false,
+    rullestol: false,
+    adresse: false,
+    pris: false,
+    id: false,
+    place: false,
+    dame: false,
   };
 }
 
