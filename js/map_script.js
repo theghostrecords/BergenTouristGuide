@@ -1,8 +1,10 @@
 /*Document by Joakim Moss Grutle*/
 var toiletArr = new Array;
 var markers = new Array;
-var advancedSearchRegex = /^\?freeSearch=((\w\=\w)|(\&\w\=on))+/
+var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.\:]*&*)+)/;
 var advancedSearchArray = location.href.match(advancedSearchRegex);
+var advancedSearchArray = advancedSearchArray[1].split("&");
+var searchCriteria;
 
 //Markers on google maps
 function initMap() {
@@ -51,23 +53,22 @@ function getEntry(s, i) {
 }
 
 function advancedSearch() {
-  var searchCriteria = searchCrit();
-  for (criteria in advancedSearchArray) {
-    if (criteria === "herre")
-      searchCriteria.gender = true
-    if (criteria === "kvinne")
-      searchCriteria.gender = true
-    if (criteria === "rullestol")
-      searchCriteria.wheelChair = true
-    if (criteria === "aapenNaa")
-      searchCriteria.openNow = true
-    if (criteria === "aapenMellom")
-      searchCriteria.openBetween = true;
-    if (criteria === "maksPris")
-      searchCriteria.maximumPrice = true
-    if (criteria === "gratis")
+  searchCriteria = searchCrit();
+  for (i in advancedSearchArray) {
+    splitArray = advancedSearchArray[i].split("=");
+    if (splitArray[0] === "kjonn" && splitArray[1] === "herre")
+      searchCriteria.gender = "herre";
+    if (splitArray[0] === "kjonn" && splitArray[1] === "kvinne")
+      searchCriteria.gender = "dame";
+    if (splitArray[0] === "rullestol" && splitArray[1] !== "")
+      searchCriteria.wheelChair = true;
+    if (splitArray[0] === "aapen" && splitArray[1] !== "")
+      searchCriteria.open = splitArray[1];
+    if (splitArray[0] === "maksPris" && splitArray[1] !== "")
+      searchCriteria.maximumPrice = splitArray[1];
+    if (splitArray[0] === "gratis" && splitArray[1] !== "")
       searchCriteria.free = true;
-    if (criteria === "stelleRom")
+    if (splitArray[0] === "stellerom" && splitArray[1] !== "")
       searchCriteria.nursery = true;
   }
 }
@@ -77,8 +78,7 @@ function searchCrit() {
   return {
     gender: false,
     free: false,
-    openNow: false,
-    openBetween: false,
+    open: false,
     wheelChair: false,
     nursery: false,
     maximumPrice: false
