@@ -69,31 +69,31 @@ function advancedSearch() {
     if (key === "maksPris" && value !== "")
       searchCriteria.pris = value;
     if (key === "gratis" && value !== "")
-      searchCriteria.gratis = true;
+      searchCriteria.pris = "0";
     if (key === "stellerom" && value !== "")
       searchCriteria.stellerom = true;
     if (key === "plassering" && value !== "")
-      searchCriteria.stellerom = value;
-    if (key === "aapen" && value !== ""){
+      searchCriteria.plassering = value;
+    if (key === "aapen" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
-      if(crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
+      if (crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
-      if(dayOfWeek < 5 || dayOfWeek > 6)
+      if (dayOfWeek < 5 || dayOfWeek > 6)
         searchCriteria.tid_hverdag = value;
-      else if(dayOfWeek === 5)
+      else if (dayOfWeek === 5)
         searchCriteria.tid_sondag = value;
       else
         searchCriteria.tid_lordag = value;
     }
-    if (key === "aapenNaa" && value !== ""){
+    if (key === "aapenNaa" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
-      if((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
+      if ((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
-      if(dayOfWeek < 5 || dayOfWeek > 6)
+      if (dayOfWeek < 5 || dayOfWeek > 6)
         searchCriteria.tid_hverdag = crtDate.getHours() + "." + crtDate.getMinutes();
-      else if(dayOfWeek === 5)
+      else if (dayOfWeek === 5)
         searchCriteria.tid_sondag = crtDate.getHours() + "." + crtDate.getMinutes();
       else
         searchCriteria.tid_lordag = crtDate.getHours() + "." + crtDate.getMinutes();
@@ -113,26 +113,23 @@ function advancedSearch() {
       for (var crit in searchCriteria) {
         if (searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet);
-          if (entry === undefined || entry === "" || entry === "NULL") {
+          if (crit !== "pris" && (entry === undefined || entry === "" || entry === "NULL")) {
             listToilet = false;
           }
-          if (crit === "tid_hverdag" && entry !== "NULL" && entry !== "ALL"){
-            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
-              listToilet = false;
-          }
-          if (crit === "tid_lordag" && entry !== "NULL" && entry !== "ALL"){
-            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
-              listToilet = false;
-          }
-          if (crit === "tid_sondag" && entry !== "NULL" && entry !== "ALL"){
-            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+          if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "NULL" && entry !== "ALL") {
+            if (searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
               listToilet = false;
           }
           // if herre === NULL && pissoir === 1 => Toalett for herrer
-          if (crit === "herre" && entry == "NULL") {
+          if (crit === "herre" && entry === "NULL") {
             entry = getEntry("pissoir_only", toilet);
             if (entry === "1")
               listToilet = true;
+          }
+          if (crit === "pris") {
+            if (Number(searchCriteria[crit]) < Number(entry)) {
+              listToilet = false;
+            }
           }
         }
       }
