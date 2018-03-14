@@ -52,93 +52,114 @@ function getEntry(s, i) {
   }
 }
 
+//Create searchCriteria object, find out which toilets to print
 function advancedSearch() {
   readJSON();
   searchCriteria = searchCrit();
   for (i in advancedSearchArray) {
-    splitArray = advancedSearchArray[i].split("=");
-    if (splitArray[0] === "kjonn" && splitArray[1] === "herre")
+    var key = advancedSearchArray[i].split("=")[0];
+    var value = advancedSearchArray[i].split("=")[1];
+
+    if (key === "kjonn" && value === "herre")
       searchCriteria.herre = true;
-    if (splitArray[0] === "kjonn" && splitArray[1] === "kvinne")
+    if (key === "kjonn" && value === "kvinne")
       searchCriteria.dame = true;
-    if (splitArray[0] === "rullestol" && splitArray[1] !== "")
+    if (key === "rullestol" && value !== "")
       searchCriteria.rullestol = true;
-    if (splitArray[0] === "maksPris" && splitArray[1] !== "")
-      searchCriteria.pris = splitArray[1];
-    if (splitArray[0] === "gratis" && splitArray[1] !== "")
+    if (key === "maksPris" && value !== "")
+      searchCriteria.pris = value;
+    if (key === "gratis" && value !== "")
       searchCriteria.gratis = true;
-    if (splitArray[0] === "stellerom" && splitArray[1] !== "")
+    if (key === "stellerom" && value !== "")
       searchCriteria.stellerom = true;
-    if (splitArray[0] === "plassering" && splitArray[1] !== "")
-      searchCriteria.stellerom = splitArray[1];
-    /*
-    if (splitArray[0] === "aapen" && splitArray[1] !== ""){
+    if (key === "plassering" && value !== "")
+      searchCriteria.stellerom = value;
+    if (key === "aapen" && value !== ""){
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
-      if()
+      if(crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
       if(dayOfWeek < 5 || dayOfWeek > 6)
-        searchCriteria.tid_hverdag = splitArray[1];
+        searchCriteria.tid_hverdag = value;
       else if(dayOfWeek === 5)
-        searchCriteria.tid_sondag = splitArray[1];
+        searchCriteria.tid_sondag = value;
       else
-        searchCriteria.tid_lordag = splitArray[1];
+        searchCriteria.tid_lordag = value;
     }
-    if (splitArray[0] === "aapenNaa" && splitArray[1] !== ""){
-      var crtDate = Date.now();
-      if()
+    if (key === "aapenNaa" && value !== ""){
+      var crtDate = new Date();
+      var dayOfWeek = crtDate.getDay();
+      if((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
       if(dayOfWeek < 5 || dayOfWeek > 6)
-        searchCriteria.tid_hverdag = splitArray[1];
+        searchCriteria.tid_hverdag = crtDate.getHours() + "." + crtDate.getMinutes();
       else if(dayOfWeek === 5)
-        searchCriteria.tid_sondag = splitArray[1];
+        searchCriteria.tid_sondag = crtDate.getHours() + "." + crtDate.getMinutes();
       else
-        searchCriteria.tid_lordag = splitArray[1];
-    }*/
+        searchCriteria.tid_lordag = crtDate.getHours() + "." + crtDate.getMinutes();
+    }
   }
   var advSearch = false;
   for (crit in searchCriteria) {
     if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
       advSearch = true;
-    }
+  }
 
   if (advSearch) {
     var arr = new Array;
 
     for (var toilet in toiletArr) {
       var listToilet = true;
-      for(var crit in searchCriteria) {
-        if(searchCriteria[crit] !== false) {
+      for (var crit in searchCriteria) {
+        if (searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet);
-          if(entry === undefined || entry === "" || entry === "NULL") {
+          if (entry === undefined || entry === "" || entry === "NULL")
             listToilet = false;
+          if (crit === "tid_hverdag" && entry !== "NULL" && entry !== "ALL"){
+            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+              listToilet = false;
+          }
+          if (crit === "tid_lordag" && entry !== "NULL" && entry !== "ALL"){
+            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+              listToilet = false;
+          }
+          if (crit === "tid_sondag" && entry !== "NULL" && entry !== "ALL"){
+            if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+              listToilet = false;
           }
         }
       }
-      if(listToilet)
+      if (listToilet)
         arr.push(toiletArr[toilet]);
     }
     toiletArr = arr;
     console.log(arr);
+  }
+
+  for (toilet in toiletArr) {
+    for (entry in toiletArr[toilet]) {
+      if (toiletArr[toilet][entry].key === "plassering")
+        addToList(toiletArr[toilet][entry].value);
+    }
   }
 }
 
 //Function that returns an object for searching
 function searchCrit() {
   return {
-    herre : false,
-    tid_sondag : false,
-    pissoir_only : false,
-    stellerom : false,
-    tid_hverdag : false,
-    plassering : false,
-    tid_lordag : false,
-    rullestol : false,
-    adresse : false,
-    pris : false,
-    id : false,
-    place : false,
-    dame : false,
+    herre: false,
+    tid_sondag: false,
+    pissoir_only: false,
+    stellerom: false,
+    tid_hverdag: false,
+    plassering: false,
+    tid_lordag: false,
+    rullestol: false,
+    adresse: false,
+    pris: false,
+    id: false,
+    place: false,
+    dame: false,
   };
 }
 
@@ -167,11 +188,10 @@ function readJSON() {
     for (var entry in json.entries[i]) {
       var value = json.entries[i][entry];
       arr.push(keyValue(entry, value));
-      if (entry === "plassering")
-        addToList(value);
     }
     toiletArr.push(arr);
   }
 }
+
 console.log("Ran map_script.js");
 console.log(advancedSearchArray);
