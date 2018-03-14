@@ -113,8 +113,9 @@ function advancedSearch() {
       for (var crit in searchCriteria) {
         if (searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet);
-          if (entry === undefined || entry === "" || entry === "NULL")
+          if (entry === undefined || entry === "" || entry === "NULL") {
             listToilet = false;
+          }
           if (crit === "tid_hverdag" && entry !== "NULL" && entry !== "ALL"){
             if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
               listToilet = false;
@@ -126,6 +127,12 @@ function advancedSearch() {
           if (crit === "tid_sondag" && entry !== "NULL" && entry !== "ALL"){
             if(searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
               listToilet = false;
+          }
+          // if herre === NULL && pissoir === 1 => Toalett for herrer
+          if (crit === "herre" && entry == "NULL") {
+            entry = getEntry("pissoir_only", toilet);
+            if (entry === "1")
+              listToilet = true;
           }
         }
       }
