@@ -2,6 +2,9 @@
 var toiletArr = new Array;
 var markers = new Array;
 var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.]*&*)+)/;
+var freeSearchRegex = /((([a-zA-Z]+:[a-zA-Z0-9]+\+*)|(([a-zA-Z]*)\+)*)+)&/;
+var freeSearchArray = location.href.match(freeSearchRegex);
+var freeSearchArray = freeSearchArray[1].split("+");
 var advancedSearchArray = location.href.match(advancedSearchRegex);
 var advancedSearchArray = advancedSearchArray[1].split("&");
 var searchCriteria;

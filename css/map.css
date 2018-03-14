@@ -99,8 +99,16 @@ h3 {
   float:none;
 }
 
+#advancedSearch input[type="checkbox"] {
+  float:none;
+}
+
 #advancedSearch label {
-    text-align: left;
+}
+
+#advancedSearch .inpGroup {
+  border-right: 0.5px solid white;
+  margin-left: 3px;
 }
 
 @media (max-width:600px)  {

@@ -47,24 +47,38 @@
           <p onclick="document.getElementById('advancedSearch').style.visibility='visible'">Avansert søk</p>
           <div id="advancedSearch" style="visibility:hidden">
             <form id="advSearchForm">
-              <label>Kjønn:</label>
-              <select name="kjonn">
-              <option disabled selected value> Velg kjønn</option>
-              <option value="herre">Herre</option>
-              <option value="kvinne">Kvinne</option>
-            </select>
-              <label>Rullestol:</label>
-              <input type="checkbox" name="rullestol">
-              <label>Åpen nå:</label>
-              <input type="checkbox" name="aapenNaa">
-              <label>Stellerom:</label>
-              <input type="checkbox" name="stellerom">
-              <label>Gratis:</label>
-              <input type="checkbox" name="gratis">
-              <label>Åpen klokken:</label>
-              <input type="text" name="aapen">
-              <label>maksPris:</label>
-              <input type="text" name="maksPris">
+              <span class="inpGroup">
+                <label>Kjønn:</label>
+                <select name="kjonn">
+                <option disabled selected value> Velg kjønn</option>
+                <option value="herre">Herre</option>
+                <option value="kvinne">Kvinne</option>
+                </select>
+              </span>
+              <span class="inpGroup">
+                <label>Rullestol:</label>
+                <input type="checkbox" name="rullestol">
+              </span>
+              <span class="inpGroup">
+                <label>Åpen nå:</label>
+                <input type="checkbox" name="aapenNaa">
+              </span>
+              <span class="inpGroup">
+                <label>Stellerom:</label>
+                <input type="checkbox" name="stellerom">
+              </span>
+              <span class="inpGroup">
+                <label>Gratis:</label>
+                <input type="checkbox" name="gratis">
+              </span>
+              <span class="inpGroup">
+                <label>Åpen klokken:</label>
+                <input type="text" name="aapen">
+              </span>
+              <span class="inpGroup">
+                <label>maksPris:</label>
+                <input type="text" name="maksPris">
+              </span>
             </form>
           </div>
         </form>
