@@ -1,8 +1,8 @@
 /*Document by Joakim Moss Grutle*/
 var toiletArr = new Array;
 var markers = new Array;
-var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.]*&*)+)/;
-var freeSearchRegex = /((([a-zA-Z]+:[a-zA-Z0-9]+\+*)|(([a-zA-Z]*)\+)*)+)&/;
+var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.\+(%3A)]*&*)+)/;
+var freeSearchRegex = /freeSearch=(((([a-zA-Z]+(%3A)[a-zA-Z0-9]+)|(([a-zA-Z]*)*))\+*)*)&/
 var freeSearchArray = location.href.match(freeSearchRegex);
 var freeSearchArray = freeSearchArray[1].split("+");
 var advancedSearchArray = location.href.match(advancedSearchRegex);
@@ -59,6 +59,13 @@ function getEntry(s, i) {
 function advancedSearch() {
   readJSON();
   searchCriteria = searchCrit();
+
+  if(freeSearchArray !== null) {
+    //var key = freeSearchArray[i].split("%3A")[0];
+    //var value = freeSearchArray[i].split("%3A")[1];
+    console.log(freeSearchArray);
+    console.log(advancedSearchArray);
+  }
   for (i in advancedSearchArray) {
     var key = advancedSearchArray[i].split("=")[0];
     var value = advancedSearchArray[i].split("=")[1];
