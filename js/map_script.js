@@ -59,7 +59,10 @@ function getEntry(s, i) {
 function advancedSearch() {
   readJSON();
   searchCriteria = searchCrit();
-  searchMatching(freeSearchArray, "%3A", searchCriteria);
+
+  if(freeSearchArray !== null)
+    searchMatching(freeSearchArray, "%3A", searchCriteria);
+
   searchMatching(advancedSearchArray, "=", searchCriteria);
 
   var advSearch = false;
@@ -75,7 +78,7 @@ function advancedSearch() {
       var listToilet = true;
       for (var crit in searchCriteria) {
         if (searchCriteria[crit] !== false) {
-          var entry = getEntry(crit, toilet);
+          var entry = getEntry(crit, toilet).toLowerCase();
           if (crit !== "pris" && (entry === undefined || entry === "" || entry === "NULL")) {
             listToilet = false;
           }
@@ -88,6 +91,9 @@ function advancedSearch() {
             entry = getEntry("pissoir_only", toilet);
             if (entry === "1")
               listToilet = true;
+          }
+          if(crit === "plassering" && !entry.match((searchCriteria[crit]))) {
+            listToilet = false;
           }
           if (crit === "pris") {
             if (Number(searchCriteria[crit]) < Number(entry)) {
@@ -132,9 +138,9 @@ function searchCrit() {
 
 function searchMatching(array, splitCharacter, searchCriteria){
   for (i in array) {
-    if(splitCharacter === "%3A" && i === 0){
-      var key === "plassering";
-      var value = array[0];
+    if(splitCharacter === "%3A" && i == 0){
+      var key = "plassering";
+      var value = array[0].toLowerCase();
     }
     else{
       var key = array[i].split(splitCharacter)[0];
