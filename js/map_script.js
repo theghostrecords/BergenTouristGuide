@@ -2,7 +2,7 @@
 var toiletArr = new Array;
 var markers = new Array;
 var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.\+(%3A)]*&*)+)/;
-var freeSearchRegex = /freeSearch=(((([a-zA-Z]+(%3A)[a-zA-Z0-9]+)|(([a-zA-Z]*)*))\+*)*)&/
+var freeSearchRegex = /freeSearch=(((([a-zA-Z]+(%3A)[a-zA-Z0-9\.]+)|(([a-zA-Z]*)*))\+*)*)&/
 var freeSearchArray = location.href.match(freeSearchRegex);
 var freeSearchArray = freeSearchArray[1].split("+");
 var advancedSearchArray = location.href.match(advancedSearchRegex);
@@ -79,15 +79,15 @@ function advancedSearch() {
       for (var crit in searchCriteria) {
         if (searchCriteria[crit] !== false) {
           var entry = getEntry(crit, toilet).toLowerCase();
-          if (crit !== "pris" && (entry === undefined || entry === "" || entry === "NULL")) {
+          if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
             listToilet = false;
           }
-          if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "NULL" && entry !== "ALL") {
+          if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "null" && entry !== "all") {
             if (searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
               listToilet = false;
           }
           // if herre === NULL && pissoir === 1 => Toalett for herrer
-          if (crit === "herre" && entry === "NULL") {
+          if (crit === "herre" && entry === "null") {
             entry = getEntry("pissoir_only", toilet);
             if (entry === "1")
               listToilet = true;
@@ -165,26 +165,29 @@ function searchMatching(array, splitCharacter, searchCriteria){
     if (key === "aapen" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
+      console.log(dayOfWeek);
       if (crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
-      if (dayOfWeek < 5 || dayOfWeek > 6)
+      console.log(dayOfWeek);
+      if (dayOfWeek < 6 && dayOfWeek > 0)
         searchCriteria.tid_hverdag = value;
-      else if (dayOfWeek === 5)
-        searchCriteria.tid_sondag = value;
+      else if (dayOfWeek === 6)
+        searchCriteria.tid.lordag = value;
       else
-        searchCriteria.tid_lordag = value;
+        searchCriteria.tid_sondag = value;
     }
     if (key === "aapenNaa" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
+      console.log(dayOfWeek);
       if ((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
-      if (dayOfWeek < 5 || dayOfWeek > 6)
+      if (dayOfWeek < 6 && dayOfWeek > 0)
         searchCriteria.tid_hverdag = crtDate.getHours() + "." + crtDate.getMinutes();
-      else if (dayOfWeek === 5)
-        searchCriteria.tid_sondag = crtDate.getHours() + "." + crtDate.getMinutes();
-      else
+      else if (dayOfWeek === 6)
         searchCriteria.tid_lordag = crtDate.getHours() + "." + crtDate.getMinutes();
+      else
+        searchCriteria.tid.sondag = crtDate.getHours() + "." + crtDate.getMinutes();
     }
   }
 }
