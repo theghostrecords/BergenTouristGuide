@@ -59,56 +59,9 @@ function getEntry(s, i) {
 function advancedSearch() {
   readJSON();
   searchCriteria = searchCrit();
+  searchMatching(freeSearchArray, "%3A", searchCriteria);
+  searchMatching(advancedSearchArray, "=", searchCriteria);
 
-  if(freeSearchArray !== null) {
-    //var key = freeSearchArray[i].split("%3A")[0];
-    //var value = freeSearchArray[i].split("%3A")[1];
-    console.log(freeSearchArray);
-    console.log(advancedSearchArray);
-  }
-  for (i in advancedSearchArray) {
-    var key = advancedSearchArray[i].split("=")[0];
-    var value = advancedSearchArray[i].split("=")[1];
-
-    if (key === "kjonn" && value === "herre")
-      searchCriteria.herre = true;
-    if (key === "kjonn" && value === "kvinne")
-      searchCriteria.dame = true;
-    if (key === "rullestol" && value !== "")
-      searchCriteria.rullestol = true;
-    if (key === "maksPris" && value !== "")
-      searchCriteria.pris = value;
-    if (key === "gratis" && value !== "")
-      searchCriteria.pris = "0";
-    if (key === "stellerom" && value !== "")
-      searchCriteria.stellerom = true;
-    if (key === "plassering" && value !== "")
-      searchCriteria.plassering = value;
-    if (key === "aapen" && value !== "") {
-      var crtDate = new Date();
-      var dayOfWeek = crtDate.getDay();
-      if (crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
-        dayOfWeek++;
-      if (dayOfWeek < 5 || dayOfWeek > 6)
-        searchCriteria.tid_hverdag = value;
-      else if (dayOfWeek === 5)
-        searchCriteria.tid_sondag = value;
-      else
-        searchCriteria.tid_lordag = value;
-    }
-    if (key === "aapenNaa" && value !== "") {
-      var crtDate = new Date();
-      var dayOfWeek = crtDate.getDay();
-      if ((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
-        dayOfWeek++;
-      if (dayOfWeek < 5 || dayOfWeek > 6)
-        searchCriteria.tid_hverdag = crtDate.getHours() + "." + crtDate.getMinutes();
-      else if (dayOfWeek === 5)
-        searchCriteria.tid_sondag = crtDate.getHours() + "." + crtDate.getMinutes();
-      else
-        searchCriteria.tid_lordag = crtDate.getHours() + "." + crtDate.getMinutes();
-    }
-  }
   var advSearch = false;
   for (crit in searchCriteria) {
     if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
@@ -177,6 +130,59 @@ function searchCrit() {
   };
 }
 
+function searchMatching(array, splitCharacter, searchCriteria){
+  for (i in array) {
+    if(splitCharacter === "%3A" && i === 0){
+      var key === "plassering";
+      var value = array[0];
+    }
+    else{
+      var key = array[i].split(splitCharacter)[0];
+      var value = array[i].split(splitCharacter)[1];
+    }
+
+
+    if (key === "kjonn" && value === "herre")
+      searchCriteria.herre = true;
+    if (key === "kjonn" && value === "kvinne")
+      searchCriteria.dame = true;
+    if (key === "rullestol" && value !== "")
+      searchCriteria.rullestol = true;
+    if (key === "maksPris" && value !== "")
+      searchCriteria.pris = value;
+    if (key === "gratis" && value !== "")
+      searchCriteria.pris = "0";
+    if (key === "stellerom" && value !== "")
+      searchCriteria.stellerom = true;
+    if (key === "plassering" && value !== "")
+      searchCriteria.plassering = value;
+    if (key === "aapen" && value !== "") {
+      var crtDate = new Date();
+      var dayOfWeek = crtDate.getDay();
+      if (crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
+        dayOfWeek++;
+      if (dayOfWeek < 5 || dayOfWeek > 6)
+        searchCriteria.tid_hverdag = value;
+      else if (dayOfWeek === 5)
+        searchCriteria.tid_sondag = value;
+      else
+        searchCriteria.tid_lordag = value;
+    }
+    if (key === "aapenNaa" && value !== "") {
+      var crtDate = new Date();
+      var dayOfWeek = crtDate.getDay();
+      if ((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
+        dayOfWeek++;
+      if (dayOfWeek < 5 || dayOfWeek > 6)
+        searchCriteria.tid_hverdag = crtDate.getHours() + "." + crtDate.getMinutes();
+      else if (dayOfWeek === 5)
+        searchCriteria.tid_sondag = crtDate.getHours() + "." + crtDate.getMinutes();
+      else
+        searchCriteria.tid_lordag = crtDate.getHours() + "." + crtDate.getMinutes();
+    }
+  }
+}
+
 //From here and down - By Øyvind Skeie liland
 function keyValue(k, v) {
   return {
@@ -209,3 +215,4 @@ function readJSON() {
 
 console.log("Ran map_script.js");
 console.log(advancedSearchArray);
+console.log(freeSearchArray);
