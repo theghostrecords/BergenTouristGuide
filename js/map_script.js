@@ -124,7 +124,6 @@ function matchWithCriteria(toilet) {
       //check if entry is empty, unless the criteria is price
       if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
         listToilet = false;
-
       }
       // Check if requested time is outside of a toilets time, if time isn't "null" or "all"
       if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "null" && entry !== "all") {
