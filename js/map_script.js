@@ -136,6 +136,7 @@ function matchWithCriteria(toilet) {
         entry = getEntry("pissoir_only", toilet);
         if (entry !== "1")
           listToilet = false;
+          console.log("JK");
       }
       //if neither place, adresse nor plassering matches, set toilet to false
       if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
