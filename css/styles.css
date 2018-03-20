@@ -61,7 +61,7 @@ body {
   transform: translateY(1px);
 }
 
-.center {
+.centerText {
   text-align: center;
   font-family: "sofia";
 }
@@ -83,9 +83,38 @@ body {
   transform-origin: 0;
 }
 
+/*By Øyvind Skeie Liland*/
+
 @media (max-width: 600px) {
   .menu a {
     font-size: 11px;
     padding: 16px 25px;
+  }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+  .header-container {
+    height: auto;
+    padding-bottom: 40px;
+  }
+
+  .header-container h1 {
+    font-size: 40px;
+  }
+
+  .menu {
+    height: 85px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .menu li {
+    height: 85px;
+  }
+
+  .menu a {
+    height: 100px;
+    font-size: 28px;
+    padding: 25px 25px;
   }
 }

@@ -56,3 +56,13 @@ img{
     font-size: 12px;
   }
 }
+
+@media (max-width: 900px) {
+  .index-content h4 {
+    font-size: 25px;
+  }
+
+  .index-content p {
+    font-size: 12px;
+  }
+}
