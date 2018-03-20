@@ -66,14 +66,15 @@ h3 {
 #searchToilets input[type="text"] {
   font-size: 20px;
   width: 50%;
-  height: 125%;
+  height: auto;
   float: left;
 }
 
 #searchToilets button {
   font-size: 20px;
   width: 10%;
-  height: 115%;
+  height: auto;
+  padding: 3px;
   border: 0;
   float:left;
 }
@@ -103,14 +104,8 @@ h3 {
   float:none;
 }
 
-#advancedSearch label {
-}
 
 #advancedSearch .inpGroup {
   border-right: 0.5px solid white;
   margin-left: 3px;
-}
-
-@media (max-width:600px)  {
-
 }
