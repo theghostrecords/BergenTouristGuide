@@ -86,7 +86,7 @@ function advancedSearch() {
   printToilets();
 }
 
-printToilets() {
+function printToilets() {
   for (toilet in toiletArr) {
     for (entry in toiletArr[toilet]) {
       if (toiletArr[toilet][entry].key === "plassering")
@@ -121,7 +121,6 @@ function matchWithCriteria(toilet) {
     if (searchCriteria[crit] !== false) {
 
       var entry = getEntry(crit, toilet).toLowerCase();
-      console.log(entry);
       //check if entry is empty, unless the criteria is price
       if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
         listToilet = false;
@@ -141,7 +140,6 @@ function matchWithCriteria(toilet) {
       //if neither place, adresse nor plassering matches, set toilet to false
       if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
         placeCounter++;
-        console.log(placeCounter);
         if (placeCounter === 3) {
           listToilet = false;
         }
