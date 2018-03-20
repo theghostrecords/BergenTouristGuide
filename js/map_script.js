@@ -134,9 +134,9 @@ function matchWithCriteria(toilet) {
       // if herre === NULL && pissoir !== 1 => don't add toilet
       if (crit === "herre" && entry === "null") {
         entry = getEntry("pissoir_only", toilet);
-        if (entry !== "1")
-          listToilet = false;
-          console.log("JK");
+        if (entry === '1'){
+          listToilet = true;
+        }
       }
       //if neither place, adresse nor plassering matches, set toilet to false
       if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
@@ -255,16 +255,3 @@ function readJSON() {
 console.log("Ran map_script.js");
 console.log(advancedSearchArray);
 console.log(freeSearchArray);
-
-var clicked = false; // keep track of hidden/visible advancedSearch options
-// Hide/Show advancedSearch
-function hideShowAdvSearch() {
-  if(clicked) {
-    clicked = false;
-    document.getElementById('advancedSearch').style.visibility = 'hidden';
-  } else {
-    clicked = true;
-    document.getElementById('advancedSearch').style.visibility = 'visible';
-  }
-}
-
