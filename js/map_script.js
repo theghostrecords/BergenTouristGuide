@@ -108,6 +108,7 @@ function advancedSearch() {
     toiletArr = arr;
   }
 
+function printToilets() {
   for (toilet in toiletArr) {
     for (entry in toiletArr[toilet]) {
       if (toiletArr[toilet][entry].key === "plassering")
@@ -133,6 +134,48 @@ function searchCrit() {
     place: false,
     dame: false,
   };
+}
+
+//return false if toilet should not be added to toiletArr
+function matchWithCriteria(toilet) {
+  var listToilet = true;
+  var placeCounter = 0;
+  for (var crit in searchCriteria) {
+    if (searchCriteria[crit] !== false) {
+
+      var entry = getEntry(crit, toilet).toLowerCase();
+      //check if entry is empty, unless the criteria is price
+      if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
+        listToilet = false;
+
+      }
+      // Check if requested time is outside of a toilets time, if time isn't "null" or "all"
+      if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "null" && entry !== "all") {
+        if (searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+          listToilet = false;
+      }
+      // if herre === NULL && pissoir !== 1 => don't add toilet
+      if (crit === "herre" && entry === "null") {
+        entry = getEntry("pissoir_only", toilet);
+        if (entry !== "1")
+          listToilet = false;
+      }
+      //if neither place, adresse nor plassering matches, set toilet to false
+      if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
+        placeCounter++;
+        if (placeCounter === 3) {
+          listToilet = false;
+        }
+      }
+      //check if price is lower than wanted price
+      if (crit === "pris") {
+        if (Number(searchCriteria[crit]) < Number(entry)) {
+          listToilet = false;
+        }
+      }
+    }
+  }
+  return listToilet;
 }
 
 //use information from the two different regex-expressions to define the values in the searchCriteria object
