@@ -60,9 +60,9 @@ function advancedSearch() {
   readJSON();
   searchCriteria = searchCrit();
 
-  if(freeSearchArray !== null)
+  if (freeSearchArray !== null) {
     searchMatching(freeSearchArray, "%3A", searchCriteria);
-
+  }
   searchMatching(advancedSearchArray, "=", searchCriteria);
 
   var advSearch = false;
@@ -92,7 +92,7 @@ function advancedSearch() {
             if (entry === "1")
               listToilet = true;
           }
-          if(crit === "plassering" && !entry.match((searchCriteria[crit]))) {
+          if (crit === "plassering" && !entry.match((searchCriteria[crit]))) {
             listToilet = false;
           }
           if (crit === "pris") {
@@ -106,7 +106,6 @@ function advancedSearch() {
         arr.push(toiletArr[toilet]);
     }
     toiletArr = arr;
-    console.log(arr);
   }
 
   for (toilet in toiletArr) {
@@ -136,13 +135,13 @@ function searchCrit() {
   };
 }
 
-function searchMatching(array, splitCharacter, searchCriteria){
+//use information from the two different regex-expressions to define the values in the searchCriteria object
+function searchMatching(array, splitCharacter, searchCriteria) {
   for (i in array) {
-    if(splitCharacter === "%3A" && i == 0){
+    if (splitCharacter === "%3A" && i == 0 && array[i].split(splitCharacter).length < 2) {
       var key = "plassering";
       var value = array[0].toLowerCase();
-    }
-    else{
+    } else {
       var key = array[i].split(splitCharacter)[0];
       var value = array[i].split(splitCharacter)[1];
     }
@@ -165,10 +164,8 @@ function searchMatching(array, splitCharacter, searchCriteria){
     if (key === "aapen" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
-      console.log(dayOfWeek);
       if (crtDate.getHours() > value.split(".")[0] || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
-      console.log(dayOfWeek);
       if (dayOfWeek < 6 && dayOfWeek > 0)
         searchCriteria.tid_hverdag = value;
       else if (dayOfWeek === 6)
@@ -179,7 +176,6 @@ function searchMatching(array, splitCharacter, searchCriteria){
     if (key === "aapenNaa" && value !== "") {
       var crtDate = new Date();
       var dayOfWeek = crtDate.getDay();
-      console.log(dayOfWeek);
       if ((crtDate.getHours() > value.split(".")[0]) || (crtDate.getHours() === value.split(".")[0] && crtDate.getMinutes() > value.split(".")[1]))
         dayOfWeek++;
       if (dayOfWeek < 6 && dayOfWeek > 0)
