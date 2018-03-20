@@ -1,20 +1,33 @@
 /*Document by Øyvind Skeie Liland */
 body{
-  overflow: hidden;
+  /*overflow: hidden;*/
+}
+
+#head-wrapper {
+  width: 100%;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+}
+.center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 img{
-  object-fit: contain;
-  margin-top: 100px;
-  width: 150%;
+  object-fit: cover;
+  margin-top: 50px;
+  height: 400px;
+  width: 100%
 }
 
 .index-content {
-  /* Plasser på bunnen av siden*/
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
   /* Hvit tekst med svart outline og gjennomsiktig svart bakgrunn */
+  margin-top: -8px;
+  width: 100%;
   background: rgba(0, 0, 0, 0.7);
   color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -35,10 +48,6 @@ img{
 
 /*Added by Joakim Moss Grutle*/
 @media (max-width: 675px) {
-  .index-content{
-    position: static;
-  }
-
   .index-content h4 {
     font-size: 25px;
   }
