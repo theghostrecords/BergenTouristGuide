@@ -218,6 +218,18 @@ function readJSON() {
   }
 }
 
+var clicked = false;
+// Hide/Show advancedSearch
+function hideShowAdvSearch() {
+  if(clicked) {
+    clicked = false;
+    document.getElementById('advancedSearch').style.visibility = 'hidden';
+  } else {
+    clicked = true;
+    document.getElementById('advancedSearch').style.visibility = 'visible';
+  }
+}
+
 console.log("Ran map_script.js");
 console.log(advancedSearchArray);
 console.log(freeSearchArray);
