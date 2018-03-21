@@ -47,37 +47,39 @@ function getLatLng(i) {
   };
 }
 
-//Get entry from toiletArr
-function getEntry(s, i) {
-  for (var entry in toiletArr[i]) {
-    var arr = toiletArr[i];
+//Get a given entry from the toiletArr array
+function getEntry(s, toilet) {
+  for (var entry in toiletArr[toilet]) {
+    var arr = toiletArr[toilet];
     if (arr[entry].key === s)
       return arr[entry].value;
   }
 }
 
 //Create searchCriteria object, find out which toilets to print
-function advancedSearch() {
+function advancedFreeSearch() {
   readJSON();
-  searchCriteria = searchCrit();
+  searchCriteria = searchCrit(); // initialize searchCriteria-object with all false values
 
-  // check if freeSearch isn't empty, run searchMatching() to initialize the searchCriteria-object
+  // check if freeSearch isn't empty, then run searchMatching() on the corresponding
+  // array to define the values in the searchCriteria-object
   if (freeSearchArray !== null) {
     searchMatching(freeSearchArray, "%3A", searchCriteria);
   }
   searchMatching(advancedSearchArray, "=", searchCriteria);
 
-  //check if any criteria in searchCriteria has been set to something other than false
-  var advSearch = false;
+  // check if any criteria in searchCriteria has been set to something other than false
+  var advFrSearch = false;
   for (crit in searchCriteria) {
     if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
-      advSearch = true;
+      advFrSearch = true;
   }
 
-  if (advSearch) {
+  //If not all values in searchCriteria equals false, match criteria with toilets
+  if (advFrSearch) {
     var arr = new Array;
     for (var toilet in toiletArr) {
-      if (matchWithCriteria(toilet)) {
+      if (matchToiletWithCriteria(toilet)) {
         arr.push(toiletArr[toilet]);
       }
     }
@@ -86,6 +88,7 @@ function advancedSearch() {
   printToilets();
 }
 
+//function used to print toilets to the numeric list
 function printToilets() {
   for (toilet in toiletArr) {
     for (entry in toiletArr[toilet]) {
@@ -95,7 +98,7 @@ function printToilets() {
   }
 }
 
-//Function that returns an object for searching,everything set to false by default
+//Function that returns an object for searching, everything set to false by default
 function searchCrit() {
   return {
     herre: false,
@@ -114,30 +117,31 @@ function searchCrit() {
 }
 
 //return false if toilet should not be added to toiletArr
-function matchWithCriteria(toilet) {
+function matchToiletWithCriteria(toilet) {
   var listToilet = true;
   var placeCounter = 0;
   for (var crit in searchCriteria) {
     if (searchCriteria[crit] !== false) {
 
-      var entry = getEntry(crit, toilet).toLowerCase();
-      //check if entry is empty, unless the criteria is price
+      var entry = getEntry(crit, toilet).toLowerCase(); // toLowerCase makes everything easier to match with
+      //check if entry is null, undefined or empty, unless the criteria is price
       if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
         listToilet = false;
       }
       // Check if requested time is outside of a toilets time, if time isn't "null" or "all"
       if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "null" && entry !== "all") {
-        if (searchCriteria[crit].split(".")[0] < entry.split("-")[0].split(".")[0] || searchCriteria[crit].split(".")[0] >= entry.split("-")[1].split(".")[0].trim())
+        if (Number(searchCriteria[crit].split(".")[0]) < Number(entry.split("-")[0].split(".")[0])
+        || Number(searchCriteria[crit].split(".")[0]) >= Number(entry.split("-")[1].split(".")[0].trim()))
           listToilet = false;
       }
-      // if herre === NULL && pissoir !== 1 => don't add toilet
+      // If kjønn=herre is a criteria, but herre === null, check if pissoir_only === '1'
       if (crit === "herre" && entry === "null") {
         entry = getEntry("pissoir_only", toilet);
-        if (entry === '1'){
+        if (entry === '1') {
           listToilet = true;
         }
       }
-      //if neither place, adresse nor plassering matches, set toilet to false
+      //if neither place, adresse nor plassering matches, set given toilet to false
       if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
         placeCounter++;
         if (placeCounter === 3) {
@@ -155,9 +159,10 @@ function matchWithCriteria(toilet) {
   return listToilet;
 }
 
-//use information from the two different regex-expressions to define the values in the searchCriteria object
+// use information from the two different regex-expressions to define the values in the searchCriteria object
 function searchMatching(array, splitCharacter, searchCriteria) {
   for (i in array) {
+    // look for address or placename in first value of freeSearch
     if (splitCharacter === "%3A" && i == 0 && array[i].split(splitCharacter).length < 2) {
       var key = "plassering";
       var value = array[0].toLowerCase();
@@ -166,35 +171,40 @@ function searchMatching(array, splitCharacter, searchCriteria) {
       var value = array[i].split(splitCharacter)[1];
     }
 
-    if ((key === "kjonn" || key === "kjønn") && value === "herre") {
-      searchCriteria.herre = true;
-    }
-    if ((key === "kjonn" || key === "kjønn") && value === "kvinne") {
-      searchCriteria.dame = true;
-    }
-    if (key === "rullestol" && value === "on") {
-      searchCriteria.rullestol = true;
-    }
-    if (key === "maksPris" && value !== "") {
-      searchCriteria.pris = value;
-    }
-    if (key === "gratis" && value === "on") {
-      searchCriteria.pris = "0";
-    }
-    if (key === "stellerom" && value === "on") {
-      searchCriteria.stellerom = true;
-    }
-    if (key === "plassering" && value !== "") {
-      searchCriteria.adresse = value;
-      searchCriteria.plassering = value;
-      searchCriteria.place = value;
-    }
-    // Separate function to check time and date values
-    checkTime(key, value);
+    addCriteria(key, value);
+    addTime(key, value);
   }
 }
 
-function checkTime(key, value) {
+// add the different search-values to the searchCriteria-object
+function addCriteria(key, value) {
+  if ((key === "kjonn" || key === "kjønn") && value === "herre") {
+    searchCriteria.herre = true;
+  }
+  if ((key === "kjonn" || key === "kjønn") && value === "kvinne") {
+    searchCriteria.dame = true;
+  }
+  if (key === "rullestol" && value === "on") {
+    searchCriteria.rullestol = true;
+  }
+  if (key === "maksPris" && value !== "") {
+    searchCriteria.pris = value;
+  }
+  if (key === "gratis" && value === "on") {
+    searchCriteria.pris = "0";
+  }
+  if (key === "stellerom" && value === "on") {
+    searchCriteria.stellerom = true;
+  }
+  if (key === "plassering" && value !== "") {
+    searchCriteria.adresse = value;
+    searchCriteria.plassering = value;
+    searchCriteria.place = value;
+  }
+}
+
+// Separate function to add time and date values
+function addTime(key, value) {
   if ((key === "aapen" || key === "åpen") && value !== "") {
     var crtDate = new Date();
     var dayOfWeek = crtDate.getDay();
@@ -254,7 +264,7 @@ function readJSON() {
 var clicked = false; // keep track of hidden/visible advancedSearch options
 // Hide/Show advancedSearch
 function hideShowAdvSearch() {
-  if(clicked) {
+  if (clicked) {
     clicked = false;
     document.getElementById('advancedSearch').style.visibility = 'hidden';
   } else {
