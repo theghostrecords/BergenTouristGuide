@@ -57,6 +57,7 @@ img{
   }
 }
 
+/*Added by Øyvind Skeie Liland*/
 @media (max-width: 900px) {
   .index-content h4 {
     font-size: 25px;
