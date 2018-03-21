@@ -176,6 +176,7 @@ function searchMatching(array, splitCharacter, searchCriteria) {
   }
 }
 
+//From here and down - By Øyvind Skeie liland
 // add the different search-values to the searchCriteria-object
 function addCriteria(key, value) {
   if ((key === "kjonn" || key === "kjønn") && value === "herre") {
@@ -231,7 +232,7 @@ function addTime(key, value) {
   }
 }
 
-//From here and down - By Øyvind Skeie liland
+// function that returns an object with a key and a value, used in toiletArr
 function keyValue(k, v) {
   return {
     key: k,
