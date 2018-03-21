@@ -1,0 +1,45 @@
+﻿Gruppemedlemmer:
+Joakim Moss Grutle, Øyvind Skeie Liland
+
+http://wildboy.uib.no/~jgr036/Semesteroppgave/Sem1/
+eller
+http://wildboy.uib.no/~oli050/INFO134/Sem2/
+
+
+Arbeidsprosess:
+
+Vi jobbet sammen med oppgaven i gruppetimene og på lesesal. Jobbet også litt
+individuelt hjemme, men det meste av arbeidet skjedde på campus sammen.
+Det var ikke mye fordeling av oppgaver, vi diskuterte hva som måtte gjøres og 
+så valgte man selv hvilken av oppgavene man ville gjøre, men vi sørget for at
+ingen gjorde det samme. 
+
+Arbeidsmengden var ca. 50/50, begge har arbeidet med ulike deler av oppgaven og
+ble enige om design og struktur av nettside sammen. 
+Øyvind har hatt et større fokus på frontend og JSON og Joakim har fokusert mest på Javascript, men begge to har bidratt
+på begge områdene.
+
+Dette har fungert veldig greit for oss, vi får til å være effektive og jobber bra
+sammen.
+
+Programmeringsoppgaven:
+
+Lesing av JSON-filen:
+JSON filen er lastet inn som en variabel i JSON.js
+Denne variabelen brukes i funksjonen readJSON(). I denne funksjonen parser vi JSON-filen og itererer gjennom
+alle toalettene med en løkke. 
+For vært toalett itererer vi gjennom alle Entries: Hver key og value (entry) blir lagret i et Key-Value objekt som pushes til dette toalettet sitt array.    
+Når alle entries for dette toalettet er iterert gjennom og er lagt til i arrayet pushes arrayet til toiletArr (Et to-dim-array. hvor hver indeks er et toaletts array med objekter) 
+
+Hvordan fungerer algoritmen:
+På refresh/submit - Match URL med Regex-uttrykk i variablene "advancedSearchRegex" og "freeSearchRegex"
+1. Onload: kjør advancedFreeSearch() 
+2. advancedSearch() kaller readJSON() => toiletArr - array med toaletter og deres entries 
+3. Opprett SearchCriteria objekt, med alle verdier lik false
+4. Se om det er blitt gitt noe input i freeSearch eller advancedSearch
+5. Set verdiene i searchCriteria objektet til verdiene fra gitt søk (URL)
+6. Match searchCriteria med toalettene som har blitt lest inn gjennom readJSON (toiletArr)
+7. Oppdater toiletArr basert på searchCriteria
+8. Legg til de ulike toalettene som har matchet alle søkekriterier i listen (og oppdater toiletArr)
+9. Oppdater kartet (med oppdatert toiletArr)
+
