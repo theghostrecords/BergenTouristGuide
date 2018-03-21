@@ -100,12 +100,42 @@ h3 {
   float:none;
 }
 
-#advancedSearch input[type="checkbox"] {
-  float:none;
-}
-
-
 #advancedSearch .inpGroup {
   border-right: 0.5px solid white;
   margin-left: 3px;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+  #map {
+    margin-top: 50px;
+  }
+
+  #searchBox h3 {
+    font-size: 30px;
+  }
+
+  #searchToilets input[type="text"] {
+    font-size: 30px;
+  }
+
+  #searchToilets button {
+    font-size: 30px;
+  }
+  #searchToilets p {
+    font-size: 25px;
+  }
+
+  #list li {
+    font-size: 25px;
+  }
+
+  #advancedSearch input[type="text"] {
+    font-size: 20px;
+    width: 7%;
+    float:none;
+  }
+
+  #advancedSearch label {
+    font-size: 20px;
+  }
 }

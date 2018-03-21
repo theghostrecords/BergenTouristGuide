@@ -55,8 +55,7 @@ img {
   }
 }
 
-@media only screen and (min-device-width: 360px) and (max-device-width: 740px){
-
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   .aktiv-element {
     flex-flow: column;
   }
@@ -69,5 +68,11 @@ img {
     width: 100%;
     height: auto;
     object-fit: fill;
+  }
+  .aktiv-element h2 {
+    font-size: 35px;
+  }
+  .aktiv-element p {
+    font-size: 18px;
   }
 }
