@@ -10,43 +10,6 @@ var advancedSearchArray = location.href.match(advancedSearchRegex);
 var advancedSearchArray = advancedSearchArray[1].split("&");
 var searchCriteria; //searchCriteria-object that contains information about whether criteria should be checked or not
 
-//initialize the marker on the map
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: {
-      lat: 60.3928444,
-      lng: 5.3239541
-    }
-  });
-
-  for (var i = 0; i < toiletArr.length; i++) {
-    markers[i] = new google.maps.Marker({
-      position: getLatLng(i),
-      map: map,
-      label: (i + 1).toString()
-    })
-  }
-}
-
-// Separate function to get latitude and longitude
-function getLatLng(i) {
-  var lat;
-  var lng;
-  for (var entry in toiletArr[i]) {
-    var arr = toiletArr[i];
-
-    if (arr[entry].key === "latitude")
-      lat = Number(arr[entry].value);
-    if (arr[entry].key === "longitude")
-      lng = Number(arr[entry].value);
-  }
-  return {
-    lat,
-    lng
-  };
-}
-
 //Get a given entry from the toiletArr array
 function getEntry(s, toilet) {
   for (var entry in toiletArr[toilet]) {
@@ -58,7 +21,7 @@ function getEntry(s, toilet) {
 
 //Create searchCriteria object, find out which toilets to print
 function advancedFreeSearch() {
-  readJSON();
+  //readJSON();
   searchCriteria = searchCrit(); // initialize searchCriteria-object with all false values
 
   // check if freeSearch isn't empty, then run searchMatching() on the corresponding
@@ -71,8 +34,9 @@ function advancedFreeSearch() {
   // check if any criteria in searchCriteria has been set to something other than false
   var advFrSearch = false;
   for (crit in searchCriteria) {
-    if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined)
+    if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined) {
       advFrSearch = true;
+    }
   }
 
   //If not all values in searchCriteria equals false, match criteria with toilets
@@ -86,6 +50,7 @@ function advancedFreeSearch() {
     toiletArr = arr;
   }
   printToilets();
+  initMap(toiletArr);
 }
 
 //function used to print toilets to the numeric list
@@ -130,8 +95,8 @@ function matchToiletWithCriteria(toilet) {
       }
       // Check if requested time is outside of a toilets time, if time isn't "null" or "all"
       if ((crit === "tid_hverdag" || crit === "tid_lordag" || crit === "tid_sondag") && entry !== "null" && entry !== "all") {
-        if (Number(searchCriteria[crit].split(".")[0]) < Number(entry.split("-")[0].split(".")[0])
-        || Number(searchCriteria[crit].split(".")[0]) >= Number(entry.split("-")[1].split(".")[0].trim()))
+        if (Number(searchCriteria[crit].split(".")[0]) < Number(entry.split("-")[0].split(".")[0]) ||
+          Number(searchCriteria[crit].split(".")[0]) >= Number(entry.split("-")[1].split(".")[0].trim()))
           listToilet = false;
       }
       // If kjønn=herre is a criteria, but herre === null, check if pissoir_only === '1'
@@ -232,26 +197,8 @@ function addTime(key, value) {
   }
 }
 
-// function that returns an object with a key and a value, used in toiletArr
-function keyValue(k, v) {
-  return {
-    key: k,
-    value: v
-  };
-}
-
-// Helper function to add list element to the ordered list
-function addToList(val) {
-  var ol = document.getElementById('list');
-  var toiletEntry = document.createElement('li');
-  toiletEntry.appendChild(document.createTextNode(val));
-  ol.appendChild(toiletEntry);
-}
-
-// Read JSON file and add to array
-function readJSON() {
-  var json = JSON.parse(data)[0];
-
+// Initialize toiletarray from JSON file
+function initToiletArr(json) {
   for (var i = 0; i < json.entries.length; i++) {
     var arr = new Array;
     for (var entry in json.entries[i]) {
@@ -260,6 +207,7 @@ function readJSON() {
     }
     toiletArr.push(arr);
   }
+  advancedFreeSearch();
 }
 
 var clicked = false; // keep track of hidden/visible advancedSearch options

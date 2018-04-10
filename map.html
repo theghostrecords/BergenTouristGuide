@@ -7,13 +7,13 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
   <link rel="stylesheet" href="css/map.css" type="text/css" />
-  <script src="json/dokart.json"></script>
+  <script src="js/jsonFunc.js"></script>
   <script src="js/map_script.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
   </script>
 </head>
 
-<body onload="advancedFreeSearch(); initMap();">
+<body onload="readJSON('https://hotell.difi.no/api/json/bergen/dokart?', 'toilets');">
   <div id="head-wrapper">
     <div class="header-container">
       <h1 class="centerText" onclick="location.href='index.html'">Toaletter i Bergen</h1>
