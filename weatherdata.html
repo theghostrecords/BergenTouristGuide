@@ -1,0 +1,43 @@
+<!-- Document by Joakim Moss Grutle -->
+<!DOCTYPE html>
+<html lang="nb">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bergen</title>
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <script src="js/jsonFunc.js"></script>
+  <script src="js/værdata.js"></script>
+</head>
+
+<body onload="readJSON('https://api.met.no/weatherapi/locationforecastlts/1.3/?lat=60.397076&lon=5.324383', 'værdata')">
+  <div id="head-wrapper">
+    <div class="header-container">
+      <h1 class="centerText" onclick="location.href='index.html'">Open data</h1>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li>
+          <a href="index.html"> Hjem </a>
+        </li>
+        <li>
+          <a href="map.html"> Toaletter i Bergen </a>
+        </li>
+        <li>
+          <a href="activities.html">
+          Aktiviteter i Bergen
+        </a>
+        </li>
+        <li>
+          <a href="lekeplasser.html">
+          Lekeplasser i Bergen
+        </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- This part edited by Øyvind Skeie Liland -->
+</body>
+
+</html>
