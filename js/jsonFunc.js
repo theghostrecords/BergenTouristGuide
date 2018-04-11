@@ -7,17 +7,19 @@ function readJSON(url, useCase) {
 
   xhr.onreadystatechange = function() {
     if (xhr.status == 200 && xhr.readyState == 4) {
-      var response = JSON.parse(xhr.responseText);
-      if (useCase === "toilets")
-        initToiletArr(response);
-      else if (useCase === "lekeplasser")
-        initLekeplassArr(response);
-      else if (useCase === "favoritt")
-        initFavArr(response);
-      else if (useCase === "otherSet")
-        initClosestToiletsList(response);
-      else if (useCase === "værdata")
+      if (useCase === "værdata")
         initVærDataArr(xhr.responseXML);
+      else {
+        var response = JSON.parse(xhr.responseText);
+        if (useCase === "toilets")
+          initToiletArr(response);
+        else if (useCase === "lekeplasser")
+          initLekeplassArr(response);
+        else if (useCase === "favoritt")
+          initFavArr(response);
+        else if (useCase === "otherSet")
+          initClosestToiletsList(response);
+      }
     }
   }
   xhr.send();

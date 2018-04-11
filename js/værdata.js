@@ -1,15 +1,11 @@
-var værdataArr = new Array;
+var weatherdataArr = new Array;
 var arr = new Array;
 
-// Initialize lekeplass Array from JSON file
+// Initialize weatherdata array from XML file
 function initVærDataArr(xml) {
-  console.log(xml);
   var time = xml.getElementsByTagName("time");
-  var temp = time[1].childNodes[1].childNodes[1].getAttribute("id");
-  console.log(time[1].childNodes[1]);
-  console.log(time);
-  console.log(time.length);
 
+  //there are 5 time-nodes per hour of the day in the xml-document
   for (var i = 0; i < time.length; i = i + 4) {
     var timeOfDay = time[i].getAttribute("to");
     if(time[i].getAttribute("from") === time[i].getAttribute("to")){
@@ -19,7 +15,7 @@ function initVærDataArr(xml) {
       arr.push(forecast(temperature, weather, timeOfDay));
     }
   }
-  værdataArr.push(arr);
+  weatherdataArr.push(arr);
 }
 
 function forecast(temp, w, time){
@@ -29,3 +25,5 @@ function forecast(temp, w, time){
     timeOfDay: time
   }
 };
+
+console.log(weatherdataArr);
