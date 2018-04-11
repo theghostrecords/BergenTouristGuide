@@ -3,20 +3,18 @@
 <html>
 
 <head>
-  <title> Lekeplasser i Bergen </title>
+  <title> Min Favorittlekeplass </title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
-  <link rel="stylesheet" href="css/map.css" type="text/css" />
+  <link rel="stylesheet" href="css/favoritt.css" type="text/css" />
   <script src="js/jsonFunc.js"></script>
-  <script src="js/lekeplasser.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
-  </script>
+  <script src="js/favoritt.js"></script>
 </head>
 
-<body onload="readJSON('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'lekeplasser');">
+<body onload="readJSON('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'favoritt');">
   <div id="head-wrapper">
     <div class="header-container">
-      <h1 class="centerText" onclick="location.href='index.html'">Lekeplasser i Bergen</h1>
+      <h1 class="centerText" onclick="location.href='index.html'">Min Favorittlekeplass</h1>
     </div>
     <nav class="menu">
         <ul>
@@ -44,14 +42,16 @@
         </ul>
       </nav>
   </div>
-  <!-- By Øyvind Skeie Liland -->
   <div id="content">
-    <div id="map"></div>
-    <div id="searchBox">
-      <h3>Lekeplasser i Bergen</h3>
-      <div id="lekeplasser">
-        <ol id="list"></ol>
-      </div>
+    <div id="favoriteBox">
+      <h4>Velg favorittlekeplass</h4>
+      <select id="favorite" name="favorite" onchange="findChosen()">
+        <option disabled selected value>Velg lekeplass</option>
+      </select>
+    </div>
+    <div id="closestBox">
+      <h4>Nærmeste toalett</h4>
+      <ol id="closestList"></ol>
     </div>
   </div>
 </body>
