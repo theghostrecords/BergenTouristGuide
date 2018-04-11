@@ -81,7 +81,7 @@ function initClosestToiletsList(response) {
     for (var distance in distances) {
         for (var toilet in tArray) {
             if (distances[distance] === tArray[toilet].key) {
-                addToOtherSetList(tArray[toilet].value);
+                addToOtherSetList(tArray[toilet].value + " - DISTANCE: " + (distances[distance]*1000).toFixed(2) + " METER");
             }
         }
     }

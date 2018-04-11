@@ -2,7 +2,6 @@
 function readJSON(url, useCase) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url);
-
   xhr.onreadystatechange = function () {
     if (xhr.status == 200 && xhr.readyState == 4) {
       var response = JSON.parse(xhr.responseText);
@@ -10,7 +9,7 @@ function readJSON(url, useCase) {
         initToiletArr(response);
       else if (useCase === "lekeplasser")
         initLekeplassArr(response);
-      else if (useCase === "favoritt")
+      else if (useCase === "favoritt") 
         initFavArr(response);
       else if (useCase === "otherSet")
         initClosestToiletsList(response);
