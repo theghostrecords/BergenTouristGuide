@@ -1,0 +1,33 @@
+/* File created by Øyvind Skeie Liland on 10.04.18 */
+
+#content {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+#content h4 {
+    color: white;
+}
+
+#favoriteBox {
+    width: 50%;
+    border: solid 2px white;
+}
+
+#closestBox {
+    width: 50%;
+    border: solid 2px white;
+}
+
+#favoriteBox select, #closestList {
+    margin-bottom: 50px;
+}
+
+#closestBox h4, #closestBox ol, #favoriteBox h4, #favoriteBox select {
+    margin-left: 20px;
+}
+
+#closestList li {
+    color: white;
+}
