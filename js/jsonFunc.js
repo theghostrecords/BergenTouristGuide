@@ -5,7 +5,7 @@ function readJSON(url, useCase) {
   //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
   console.log(xhr);
 
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function() {
     if (xhr.status == 200 && xhr.readyState == 4) {
       var response = JSON.parse(xhr.responseText);
       if (useCase === "toilets")
@@ -16,7 +16,7 @@ function readJSON(url, useCase) {
         initFavArr(response);
       else if (useCase === "otherSet")
         initClosestToiletsList(response);
-      else if (useCase === "værdata"){
+      else if (useCase === "værdata")
         initVærDataArr(xhr.responseXML);
     }
   }
