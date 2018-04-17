@@ -1,0 +1,23 @@
+/*Document by Joakim Moss Grutle */
+#forecast{
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-right: 30%;
+}
+
+#info{
+  margin-top: 50px;
+  font-size: 15px;
+}
+
+a{
+  color: white;
+  font-size: 15px;
+}
+
+td, th{
+  padding: 5px;
+  border: solid 1px white;
+}
