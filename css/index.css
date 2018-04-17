@@ -1,7 +1,4 @@
 /*Document by Øyvind Skeie Liland */
-body{
-  /*overflow: hidden;*/
-}
 
 #head-wrapper {
   width: 100%;
@@ -11,13 +8,14 @@ body{
   display: flex;
   flex-direction: column;
 }
+
 .center {
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
 
-img{
+img {
   object-fit: cover;
   margin-top: 50px;
   height: 400px;
@@ -37,33 +35,33 @@ img{
 .index-content h4 {
   margin-top: 0px;
   text-align: center;
-  font-size: 30px;
+  font-size: 1.875em;
 }
 
 .index-content p {
-  font-size: 16px;
+  font-size: 1em;
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /*Added by Joakim Moss Grutle*/
+
 @media (max-width: 675px) {
   .index-content h4 {
-    font-size: 25px;
+    font-size: 1.5625em;
   }
-
   .index-content p {
-    font-size: 12px;
+    font-size: 0.75em;
   }
 }
 
 /*Added by Øyvind Skeie Liland*/
+
 @media (max-width: 900px) {
   .index-content h4 {
-    font-size: 25px;
+    font-size: 1.5625em;
   }
-
   .index-content p {
-    font-size: 12px;
+    font-size: 0.75em;
   }
 }

@@ -19,30 +19,35 @@
       <h1 class="centerText" onclick="location.href='index.html'">Toaletter i Bergen</h1>
     </div>
     <nav class="menu">
-        <ul>
-          <li>
-            <a href="index.html"> Hjem </a>
-          </li>
-          <li>
-            <a href="map.html"> Toaletter i Bergen </a>
-          </li>
-          <li>
-            <a href="activities.html">
+      <ul>
+        <li>
+          <a href="index.html"> Gå til hjemmeside </a>
+        </li>
+        <li>
+          <a href="map.html"> Toaletter i Bergen </a>
+        </li>
+        <li>
+          <a href="activities.html">
             Aktiviteter i Bergen
           </a>
-          </li>
-          <li>
-            <a href="lekeplasser.html">
+        </li>
+        <li>
+          <a href="lekeplasser.html">
             Lekeplasser i Bergen
           </a>
-          </li>
-          <li>
-            <a href="minFavorittLekeplass.html">
+        </li>
+        <li>
+          <a href="minFavorittLekeplass.html">
             Min Favorittlekeplass
           </a>
-          </li>
-        </ul>
-      </nav>
+        </li>
+        <li>
+          <a href="weatherdata.html">
+            Værvarsel Bergen
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
   <!-- By Øyvind Skeie Liland -->
   <div id="content">
@@ -55,14 +60,14 @@
           <button type="submit">Søk</button>
           <br/>
           <p onclick="hideShowAdvSearch()">Avansert søk</p>
-          <div id="advancedSearch" style="visibility:hidden">
+          <div id="advancedSearch" style="display:none">
             <div id="advSearchForm">
               <span class="inpGroup">
                 <label>Kjønn:</label>
                 <select name="kjonn">
-                <option disabled selected value> Velg kjønn</option>
-                <option value="herre">Herre</option>
-                <option value="kvinne">Kvinne</option>
+                  <option disabled selected value> Velg kjønn</option>
+                  <option value="herre">Herre</option>
+                  <option value="kvinne">Kvinne</option>
                 </select>
               </span>
               <span class="inpGroup">

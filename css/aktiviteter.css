@@ -56,6 +56,10 @@ img {
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+  .aktivitet {
+    margin-top: 375px;
+  }
+
   .aktiv-element {
     flex-flow: column;
   }
@@ -70,9 +74,9 @@ img {
     object-fit: fill;
   }
   .aktiv-element h2 {
-    font-size: 35px;
+    font-size: 2.1875em;
   }
   .aktiv-element p {
-    font-size: 18px;
+    font-size: 1.125em;
   }
 }

@@ -1,4 +1,5 @@
 /*Document by Øyvind Skeie Liland*/
+
 @import url("https://fonts.googleapis.com/css?family=Sofia");
 body {
   background: #303030;
@@ -15,8 +16,8 @@ body {
   left: 0px;
   width: 100%;
   position: fixed;
-  height: 45px;
   border-bottom: 2px solid;
+  height: auto;
 }
 
 .menu ul {
@@ -37,10 +38,10 @@ body {
 }
 
 /*.menu a by Joakim Moss Grutle*/
+
 .menu a {
   display: block;
-  padding: 15px 25px;
-  font-size: 16px;
+  padding: 16px 26px;
   text-align: center;
   cursor: pointer;
   outline: none;
@@ -76,7 +77,6 @@ body {
   position: fixed;
   top: 0px;
   left: 0px;
-  height: auto;
   background: linear-gradient(125deg, #191919, #424bf4);
   display: inline-block;
   transform: skewY(-1deg);
@@ -86,8 +86,12 @@ body {
 /*By Øyvind Skeie Liland*/
 
 @media (max-width: 600px) {
+  .menu {
+    height: auto;
+  }
+
   .menu a {
-    font-size: 11px;
+    font-size: 0.6875em;
     padding: 16px 25px;
   }
 }
@@ -97,24 +101,32 @@ body {
     height: auto;
     padding-bottom: 40px;
   }
-
   .header-container h1 {
-    font-size: 40px;
+    font-size: 2.5em;
   }
-
   .menu {
-    height: 85px;
+    height: auto;
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
-  .menu li {
-    height: 85px;
+  .menu ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
+  .menu li {
+    width: 49.7%;
+    height: 85px;
+  }
   .menu a {
     height: 100px;
-    font-size: 28px;
+    font-size: 1.75em;
     padding: 25px 25px;
+  }
+
+  #content {
+    margin-top: 200px;
   }
 }

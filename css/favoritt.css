@@ -1,7 +1,7 @@
 /* File created by Øyvind Skeie Liland on 10.04.18 */
 
 #content {
-    margin-top: 150px;
+    margin-top: 160px;
     display: flex;
     flex-direction: row;
 }
@@ -20,14 +20,24 @@
     border: solid 2px white;
 }
 
-#favoriteBox select, #closestList {
+#favoriteBox select,
+#closestList {
     margin-bottom: 50px;
 }
 
-#closestBox h4, #closestBox ol, #favoriteBox h4, #favoriteBox select {
+#closestBox h4,
+#closestBox ol,
+#favoriteBox h4,
+#favoriteBox select {
     margin-left: 20px;
 }
 
 #closestList li {
     color: white;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+    #content {
+        margin-top: 375px;
+    }
 }
