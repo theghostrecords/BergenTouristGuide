@@ -45,38 +45,38 @@ h3 {
   width: 100%;
 }
 
-
 #list li {
   color: white;
 }
 
 #searchToilets p {
-  color:white;
-  font-size: 20px;
+  color: white;
+  font-size: 1.25em;
   text-decoration: underline;
 }
 
 #searchToilets {
   width: 100%;
 }
+
 #searchToilets p:hover {
   cursor: pointer;
 }
 
 #searchToilets input[type="text"] {
-  font-size: 20px;
+  font-size: 1.25em;
   width: 50%;
   height: auto;
   float: left;
 }
 
 #searchToilets button {
-  font-size: 20px;
+  font-size: 1.25em;
   width: 10%;
   height: auto;
   padding: 3px;
   border: 0;
-  float:left;
+  float: left;
 }
 
 #searchToilets button:hover {
@@ -91,51 +91,61 @@ h3 {
 }
 
 #advancedSearch {
-  color:white;
+  color: white;
 }
 
 #advancedSearch input[type="text"] {
-  font-size: 10px;
-  width: 7%;
-  float:none;
+  font-size: 1.25em;
+  width: 10%;
+  float: none;
 }
 
 #advancedSearch .inpGroup {
   border-right: 0.5px solid white;
-  margin-left: 3px;
+  margin-left: 1%;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   #map {
-    margin-top: 50px;
+    margin-top: 200px;
   }
 
   #searchBox h3 {
-    font-size: 30px;
+    font-size: 1.875em;
   }
 
   #searchToilets input[type="text"] {
-    font-size: 30px;
+    font-size: 1.875em;
   }
 
   #searchToilets button {
-    font-size: 30px;
+    font-size: 1.875em;
   }
+
   #searchToilets p {
-    font-size: 25px;
+    font-size: 1.5625em;
   }
 
   #list li {
-    font-size: 25px;
+    font-size: 1.5625em;
   }
 
   #advancedSearch input[type="text"] {
-    font-size: 20px;
-    width: 7%;
-    float:none;
+    font-size: 1.5em;
+    width: 15%;
+    float: none;
+  }
+  
+  #advancedSearch input[type="checkbox"] {
+    transform: scale(3);
+    margin: 1%;
+  }
+
+  #advancedSearch select {
+    font-size: 1.5em;
   }
 
   #advancedSearch label {
-    font-size: 20px;
+    font-size: 1.75em;
   }
 }

@@ -215,10 +215,10 @@ var clicked = false; // keep track of hidden/visible advancedSearch options
 function hideShowAdvSearch() {
   if (clicked) {
     clicked = false;
-    document.getElementById('advancedSearch').style.visibility = 'hidden';
+    document.getElementById('advancedSearch').style.display = 'block';
   } else {
     clicked = true;
-    document.getElementById('advancedSearch').style.visibility = 'visible';
+    document.getElementById('advancedSearch').style.display = 'none';
   }
 }
 
