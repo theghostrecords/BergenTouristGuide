@@ -1,5 +1,6 @@
 /*Document by Joakim Moss Grutle */
-#forecast{
+
+#forecast {
   margin-top: 150px;
   display: flex;
   flex-direction: column;
@@ -7,17 +8,24 @@
   margin-right: 30%;
 }
 
-#info{
+#info {
   margin-top: 50px;
   font-size: 15px;
 }
 
-a{
+a {
   color: white;
   font-size: 15px;
 }
 
-td, th{
+td,
+th {
   padding: 5px;
   border: solid 1px white;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
+  #forecast {
+    margin-top: 375px;
+  }
 }
