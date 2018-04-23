@@ -2,7 +2,9 @@
 function readJSON(url, useCase) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url);
-  
+  //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+  console.log(xhr);
+
   xhr.onreadystatechange = function() {
     if (xhr.status == 200 && xhr.readyState == 4) {
       if (useCase === "værdata")

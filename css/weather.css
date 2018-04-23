@@ -24,6 +24,11 @@ th {
   border: solid 1px white;
 }
 
+select{
+  padding: 5px;
+  width: 20%;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   #forecast {
     margin-top: 375px;

@@ -14,7 +14,7 @@
 <body onload="readJSON('https://api.met.no/weatherapi/locationforecastlts/1.3/?lat=60.397076&lon=5.324383', 'værdata')">
   <div id="head-wrapper">
     <div class="header-container">
-      <h1 class="centerText" onclick="location.href='index.html'">Open data</h1>
+      <h1 class="centerText" onclick="location.href='index.html'">Værvarsel</h1>
     </div>
     <nav class="menu">
       <ul>
@@ -48,22 +48,43 @@
     </nav>
   </div>
   <div id="forecast">
-    <select id="favorite" name="favorite" onchange="findChosen()">
+    <div onchange="findChosen()">
+      <select id="sort" name="sort">
+      <option disabled selected value>Sorter etter</option>
+      <option>Tid reversert</option>
+      <option>Temperatur</option>
+      <option>Temperatur reversert</option>
+      <option>Værtype alfabetisk</option>
+      <option>Værtype alfabetisk reversert</option>
+      <option>Reset</option>
+    </select>
+      <select id="weather" name="weather">
       <option disabled selected value>Velg vær</option>
     </select>
-    <h3>Værvarsel for Bergen</h3>
-    <table id="list">
-      <tr>
-        <th>Dato</th>
-        <th>Tid</th>
-        <th>Temperatur</th>
-        <th>Vær</th>
-      </tr>
+      <select id="date" name="date">
+      <option disabled selected value>Velg dato</option>
+    </select>
+      <span>
+      <input type="text" id="temperature" placeholder="Varmere enn...">
+    </span>
+    </div>
+    <h3>Værvarsel de neste tre dagene i Bergen (Time for time)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Dato</th>
+          <th>Tid</th>
+          <th>Temperatur</th>
+          <th>Vær</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
     </table>
-    <div id ="info"> Værvarsel hentet fra
+    <div id="info"> Værvarsel hentet fra
       <a href="https://www.met.no/frie-meteorologiske-data/frie-meteorologiske-data">meterologisk institutt.</a>
       <div><a href="https://api.met.no/weatherapi/locationforecastlts/1.3/?lat=60.397076&lon=5.324383">Link til værvarsel i XML format.</a></div>
-  </div>
+    </div>
 
 </body>
 

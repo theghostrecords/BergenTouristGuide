@@ -1,9 +1,11 @@
 //document by Joakim Moss Grutle
-var weatherdataArr = new Array;
+var forecastArr = new Array;
 var weatherOptions = new Array;
+var dateOptions = new Array;
 
 // Initialize weatherdata array from XML file
 function initVærDataArr(xml) {
+  forecastArr = new Array;
   var time = xml.getElementsByTagName("time");
 
   //there are 5 time-nodes per hour of the day in the xml-document
@@ -19,17 +21,20 @@ function initVærDataArr(xml) {
       var weather = time[i].childNodes[1].childNodes[3].getAttribute("id");
       if (weather === "TTT")
         break;
-      weatherdataArr.push(forecast(temperature, weather, timeOfDay, date));
+      forecastArr.push(forecast(temperature, weather, timeOfDay, date.toDateString().substring(4)));
     }
     i = i - 3;
   }
-  writeForecast();
+
+  writeForecast(forecastArr);
+  initWeatherOptions();
+  initDateOptions();
 }
 
 // function to write the table with the weatherforecast
-function writeForecast() {
-  for (var i = 0; i < weatherdataArr.length; i++) {
-    var list = document.getElementById("list");
+function writeForecast(array) {
+  for (var i = 0; i < array.length; i++) {
+    var list = document.getElementById("table");
     var tr = document.createElement("tr");
 
     var tdDate = document.createElement("td");
@@ -37,10 +42,10 @@ function writeForecast() {
     var tdTemp = document.createElement("td");
     var tdWeather = document.createElement("td");
 
-    tdDate.appendChild(document.createTextNode(weatherdataArr[i].date.toDateString().substring(4)));
-    tdTime.appendChild(document.createTextNode(weatherdataArr[i].timeOfDay));
-    tdTemp.appendChild(document.createTextNode(weatherdataArr[i].temperature + "° C"));
-    tdWeather.appendChild(document.createTextNode(weatherdataArr[i].weather));
+    tdDate.appendChild(document.createTextNode(array[i].date));
+    tdTime.appendChild(document.createTextNode(array[i].timeOfDay));
+    tdTemp.appendChild(document.createTextNode(array[i].temperature + "° C"));
+    tdWeather.appendChild(document.createTextNode(array[i].weather));
 
     tr.appendChild(tdDate);
     tr.appendChild(tdTime);
@@ -51,31 +56,132 @@ function writeForecast() {
   }
 }
 
-function initFavOptions() {
-    var select = document.getElementById('favorite');
-    for (var i in weatherdataArr) {
-      if(!weatherOptions.contains(i.weather))
-        weatherOptions.push(i.weather);
-        }
+//initialize the select-weather box with options
+function initWeatherOptions() {
+  var selected = document.getElementById('weather');
+  for (var i in forecastArr) {
+    if (!weatherOptions.includes(forecastArr[i].weather)) {
+      weatherOptions.push(forecastArr[i].weather);
+    }
+  }
+  for (var i in weatherOptions) {
     var opt = document.createElement("option");
-    for(var i in weatherOptions)
-      opt.appendChild(document.createTextNode(i));
-
-    select.appendChild(opt);
+    opt.appendChild(document.createTextNode(weatherOptions[i]));
+    selected.appendChild(opt)
+  }
+  var reset = document.createElement("option");
+  reset.appendChild(document.createTextNode("Reset"))
+  selected.appendChild(reset);
 }
 
-function findChosenWeather() {
-    // Get the chosen playgrouns coordinates
-    var chosen = document.getElementById('favorite').value;
-    var index = "";
-    if (index === -1) {
-        console.log("This playground does not exist in the dataset");
-        return;
+//initialize the select-date box with options
+function initDateOptions() {
+  var selected = document.getElementById('date');
+  for (var i in forecastArr) {
+    if (!dateOptions.includes(forecastArr[i].date)) {
+      dateOptions.push(forecastArr[i].date);
     }
-    playGroundCoord = coordinate(lekeplassArr[index][3].value, lekeplassArr[index][0].value)
+  }
+  for (var i in dateOptions) {
+    var opt = document.createElement("option");
+    opt.appendChild(document.createTextNode(dateOptions[i]));
+    selected.appendChild(opt)
+  }
+  var reset = document.createElement("option");
+  reset.appendChild(document.createTextNode("Reset"))
+  selected.appendChild(reset);
+}
 
-    // Get the other dataset -> readJSON calls the function: initClosestToiletsList in this file
-    var json = readJSON('https://hotell.difi.no/api/json/bergen/dokart?', 'otherSet');
+//find the chosen traits and write a new forecast
+function findChosen() {
+  document.getElementById('table').innerHTML = "";
+  var printedArr = new Array;
+  var chosenWeather = document.getElementById('weather').value;
+  var chosenDate = document.getElementById('date').value;
+  var chosenTemp = document.getElementById('temperature').value;
+  var chosenSort = document.getElementById('sort').value;
+
+  if (chosenWeather === "Reset") {
+    document.getElementById('weather').selectedIndex = 0;
+    chosenWeather = '';
+  } else if (chosenDate === "Reset") {
+    document.getElementById('date').selectedIndex = 0;
+    chosenDate = '';
+  }
+  else if (chosenSort === "Reset"){
+    document.getElementById('sort').selectedIndex = 0;
+    chosenSort = '';
+  }
+  for (var i in forecastArr) {
+    if (forecastArr[i].date === chosenDate && forecastArr[i].weather === "" && Number(forecastArr[i].temperature) === "")
+      printedArr.push(forecastArr[i]);
+    else if (chosenDate === '' && forecastArr[i].weather === chosenWeather && chosenTemp === '')
+      printedArr.push(forecastArr[i]);
+    else if (chosenDate === '' && chosenWeather === '' && Number(forecastArr[i].temperature) > chosenTemp)
+      printedArr.push(forecastArr[i]);
+    else if (chosenDate === '' && forecastArr[i].weather === chosenWeather && Number(forecastArr[i].temperature) > chosenTemp)
+      printedArr.push(forecastArr[i]);
+    else if (forecastArr[i].date === chosenDate && forecastArr[i].weather === chosenWeather && chosenTemp === '')
+      printedArr.push(forecastArr[i]);
+    else if (forecastArr[i].date === chosenDate && chosenWeather === '' && Number(forecastArr[i].temperature) > chosenTemp)
+      printedArr.push(forecastArr[i]);
+    else if (forecastArr[i].date === chosenDate && forecastArr[i].weather === chosenWeather && Number(forecastArr[i].temperature) > chosenTemp)
+      printedArr.push(forecastArr[i]);
+  }
+
+  if(chosenSort === "Tid reversert")
+    printedArr.reverse();
+  else if (chosenSort === "Værtype alfabetisk")
+    printedArr = sortByWeather(printedArr)
+  else if (chosenSort === "Værtype alfabetisk reversert"){
+    printedArr = sortByWeather(printedArr);
+    printedArr.reverse();
+  }
+  else if (chosenSort === "Temperatur")
+    printedArr = sortByTemp(printedArr)
+  else if (chosenSort === "Temperatur reversert"){
+    printedArr = sortByTemp(printedArr);
+    printedArr.reverse();
+  }
+
+  writeForecast(printedArr);
+}
+
+function sortByWeather(printedArr) {
+  var sortArr = new Array;
+  for(var i in printedArr){
+    sortArr.push(printedArr[i].weather);
+  }
+  sortArr.sort();
+  for(var i in sortArr){
+    for(var j in printedArr){
+      if(sortArr[i] === printedArr[j].weather){
+          sortArr[i] = printedArr[j];
+          printedArr.splice(j, 1);
+          break;
+      }
+    }
+  }
+  return sortArr;
+}
+
+function sortByTemp(printedArr) {
+  var sortArr = new Array;
+  for(var i in printedArr){
+    sortArr.push(printedArr[i].temperature);
+  }
+  sortArr.sort();
+  sortArr.reverse(); //want the highest temperatures first
+  for(var i in sortArr){
+    for(var j in printedArr){
+      if(sortArr[i] === printedArr[j].temperature){
+          sortArr[i] = printedArr[j];
+          printedArr.splice(j, 1);
+          break;
+      }
+    }
+  }
+  return sortArr;
 }
 
 
@@ -88,5 +194,3 @@ function forecast(te, w, ti, d) {
     date: d
   }
 };
-
-console.log(weatherdataArr);
