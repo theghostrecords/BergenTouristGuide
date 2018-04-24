@@ -6,38 +6,65 @@
     flex-direction: row;
 }
 
-#content h4 {
+#content h3 {
     color: white;
 }
 
 #favoriteBox {
-    width: 50%;
+    width: 49.5%;
     border: solid 2px white;
 }
 
 #closestBox {
-    width: 50%;
+    width: 49.5%;
     border: solid 2px white;
+    border-left: none;
+}
+
+#closestBox table {
+    width: 100%;
 }
 
 #favoriteBox select,
-#closestList {
+#closestTable {
     margin-bottom: 50px;
 }
 
-#closestBox h4,
+#closestBox h3,
 #closestBox ol,
-#favoriteBox h4,
+#favoriteBox h3,
 #favoriteBox select {
     margin-left: 20px;
 }
 
-#closestList li {
+th,
+td {
+    width: 25%;
+    padding: 5px;
+    border: solid 1px white;
     color: white;
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
     #content {
         margin-top: 375px;
+        flex-direction: column;
+    }
+    #favoriteBox {
+        width: 100%;
+    }
+    #closestBox {
+        width: 100%;
+        border-left: solid 2px white;
+    }
+    select {
+        font-size: 1.5em;
+    }
+    h3 {
+        font-size: 2em;
+    }
+    td,
+    th {
+        font-size: 1.8em;
     }
 }

@@ -37,7 +37,7 @@ function findChosen() {
         return;
     }
     playGroundCoord = coordinate(lekeplassArr[index][3].value, lekeplassArr[index][0].value)
-    
+
     // Get the other dataset -> readJSON calls the function: initClosestToiletsList in this file
     var json = readJSON('https://hotell.difi.no/api/json/bergen/dokart?', 'otherSet');
 }
@@ -63,13 +63,13 @@ function initClosestToiletsList(response) {
     var json = response.entries;
     // Read toilets to array with distance => Hashmap with key being the distance (assuming unique distances)
     var tArray = new Array;
-    for(let entry in json) {
+    for (let entry in json) {
         var lng = json[entry].longitude;
         var lat = json[entry].latitude;
         var distance = calculateDistance(playGroundCoord, coordinate(lng, lat));
         tArray.push(keyValue(distance, json[entry].plassering));
     }
-    
+
     // sort for distance
     var distances = new Array;
     for (var distance in tArray) {
@@ -81,21 +81,26 @@ function initClosestToiletsList(response) {
     for (var distance in distances) {
         for (var toilet in tArray) {
             if (distances[distance] === tArray[toilet].key) {
-                addToOtherSetList(tArray[toilet].value + " - DISTANCE: " + (distances[distance]*1000).toFixed(2) + " METER");
+                addToOtherSetList(tArray[toilet].value, (distances[distance] * 1000).toFixed(2));
             }
         }
     }
 }
 
 // Add name of a toilet to the Ordered List
-function addToOtherSetList(name) {
-    var list = document.getElementById('closestList');
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(name));
-    list.appendChild(li);
+function addToOtherSetList(name, distance) {
+    var table = document.getElementById('closestTable');
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    td.appendChild(document.createTextNode(name));
+    tr.appendChild(td);
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(distance));
+    tr.appendChild(td);
+    table.appendChild(tr);
 }
 
 // Clear the ordered list of all names
 function clearList() {
-   document.getElementById('closestList').innerHTML = "";
+    document.getElementById('closestTable').innerHTML = "";
 }
