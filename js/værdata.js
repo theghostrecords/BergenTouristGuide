@@ -5,6 +5,10 @@ var dateOptions = new Array;
 
 // Initialize weatherdata array from XML file
 function initVærDataArr(xml) {
+  // Response needs to be parsed to be manipulated
+  parser = new DOMParser();
+  xml = parser.parseFromString(xml, "text/xml");
+
   forecastArr = new Array;
   var time = xml.getElementsByTagName("time");
 
@@ -107,8 +111,7 @@ function findChosen() {
   } else if (chosenDate === "Reset") {
     document.getElementById('date').selectedIndex = 0;
     chosenDate = '';
-  }
-  else if (chosenSort === "Reset"){
+  } else if (chosenSort === "Reset") {
     document.getElementById('sort').selectedIndex = 0;
     chosenSort = '';
   }
@@ -129,19 +132,17 @@ function findChosen() {
       printedArr.push(forecastArr[i]);
   }
 
-  if(chosenSort === "Tid reversert")
+  if (chosenSort === "Tid reversert")
     printedArr.reverse();
   else if (chosenSort === "Værtype alfabetisk")
     printedArr = sortBy(printedArr, "weather")
-  else if (chosenSort === "Værtype alfabetisk reversert"){
+  else if (chosenSort === "Værtype alfabetisk reversert") {
     printedArr = sortBy(printedArr, "weather");
     printedArr.reverse();
-  }
-  else if (chosenSort === "Temperatur"){
+  } else if (chosenSort === "Temperatur") {
     printedArr = sortBy(printedArr, "temperature")
     printedArr.reverse();
-  }
-  else if (chosenSort === "Temperatur reversert")
+  } else if (chosenSort === "Temperatur reversert")
     printedArr = sortBy(printedArr, "temperature");
   writeForecast(printedArr);
 }
@@ -149,16 +150,16 @@ function findChosen() {
 
 function sortBy(printedArr, type) {
   var sortArr = new Array;
-  for(var i in printedArr){
+  for (var i in printedArr) {
     sortArr.push(printedArr[i][type]);
   }
   sortArr.sort();
-  for(var i in sortArr){
-    for(var j in printedArr){
-      if(sortArr[i] === printedArr[j][type]){
-          sortArr[i] = printedArr[j];
-          printedArr.splice(j, 1);
-          break;
+  for (var i in sortArr) {
+    for (var j in printedArr) {
+      if (sortArr[i] === printedArr[j][type]) {
+        sortArr[i] = printedArr[j];
+        printedArr.splice(j, 1);
+        break;
       }
     }
   }
