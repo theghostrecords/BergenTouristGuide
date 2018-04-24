@@ -49,14 +49,22 @@
   </div>
   <div id="content">
     <div id="favoriteBox">
-      <h4>Velg favorittlekeplass</h4>
+      <h3>Velg favorittlekeplass</h3>
       <select id="favorite" name="favorite" onchange="findChosen()">
         <option disabled selected value>Velg lekeplass</option>
       </select>
     </div>
     <div id="closestBox">
-      <h4>Nærmeste toalett</h4>
-      <ol id="closestList"></ol>
+      <h3>Nærmeste toalett</h3>
+      <table>
+        <thead>
+          <tr>
+            <td>Toalett</td>
+            <td>Avstand i meter</td>
+          </tr>
+        </thead>
+        <tbody id="closestTable"></tbody>
+      </table>
     </div>
   </div>
 </body>
