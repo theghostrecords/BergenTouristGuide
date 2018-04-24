@@ -1,16 +1,36 @@
-// Send GET-request for dataset (JSON-format)
+// Send GET-request for dataset (JSON/XML-format)
 function readJSON(url, useCase) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url);
-  //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-  console.log(xhr);
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
 
-  xhr.onreadystatechange = function() {
-    if (xhr.status == 200 && xhr.readyState == 4) {
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          if (useCase === "værdata")
+            resolve(xhr.responseXML);
+          else
+            resolve(xhr.response);
+        } else {
+          if (useCase === "værdata")
+            reject(xhr.responseXML);
+          else
+            reject(xhr.response);
+        }
+      }
+    };
+    xhr.send();
+  });
+}
+
+// Forklar hvorfor denne finnes
+function scan(url, useCase) {
+  var promise = readJSON(url);
+  promise.then(function (response) {
       if (useCase === "værdata")
-        initVærDataArr(xhr.responseXML);
+        initVærDataArr(response);
       else {
-        var response = JSON.parse(xhr.responseText);
+        var response = JSON.parse(response);
         if (useCase === "toilets")
           initToiletArr(response);
         else if (useCase === "lekeplasser")
@@ -20,9 +40,10 @@ function readJSON(url, useCase) {
         else if (useCase === "otherSet")
           initClosestToiletsList(response);
       }
-    }
-  }
-  xhr.send();
+    })
+    .catch(function (reason) {
+      console.log(reason); // legg inn feilmelding
+    });
 }
 
 //initialize the marker on the map

@@ -10,6 +10,7 @@ var advancedSearchArray = location.href.match(advancedSearchRegex);
 var advancedSearchArray = advancedSearchArray[1].split("&");
 var searchCriteria; //searchCriteria-object that contains information about whether criteria should be checked or not
 
+
 //Get a given entry from the toiletArr array
 function getEntry(s, toilet) {
   for (var entry in toiletArr[toilet]) {

@@ -1,6 +1,7 @@
 var lekeplassArr = new Array;
 var playGroundCoord;
 
+
 // Initialize lekeplass Array from JSON file
 function initFavArr(json) {
     for (var i = 0; i < json.entries.length; i++) {
@@ -39,7 +40,7 @@ function findChosen() {
     playGroundCoord = coordinate(lekeplassArr[index][3].value, lekeplassArr[index][0].value)
 
     // Get the other dataset -> readJSON calls the function: initClosestToiletsList in this file
-    var json = readJSON('https://hotell.difi.no/api/json/bergen/dokart?', 'otherSet');
+    var json = scan('https://hotell.difi.no/api/json/bergen/dokart?', 'otherSet');
 }
 
 function getLekeplassIndex(name) {
