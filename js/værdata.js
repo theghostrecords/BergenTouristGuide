@@ -132,49 +132,30 @@ function findChosen() {
   if(chosenSort === "Tid reversert")
     printedArr.reverse();
   else if (chosenSort === "Værtype alfabetisk")
-    printedArr = sortByWeather(printedArr)
+    printedArr = sortBy(printedArr, "weather")
   else if (chosenSort === "Værtype alfabetisk reversert"){
-    printedArr = sortByWeather(printedArr);
+    printedArr = sortBy(printedArr, "weather");
     printedArr.reverse();
   }
-  else if (chosenSort === "Temperatur")
-    printedArr = sortByTemp(printedArr)
-  else if (chosenSort === "Temperatur reversert"){
-    printedArr = sortByTemp(printedArr);
+  else if (chosenSort === "Temperatur"){
+    printedArr = sortBy(printedArr, "temperature")
     printedArr.reverse();
   }
-
+  else if (chosenSort === "Temperatur reversert")
+    printedArr = sortBy(printedArr, "temperature");
   writeForecast(printedArr);
 }
 
-function sortByWeather(printedArr) {
-  var sortArr = new Array;
-  for(var i in printedArr){
-    sortArr.push(printedArr[i].weather);
-  }
-  sortArr.sort();
-  for(var i in sortArr){
-    for(var j in printedArr){
-      if(sortArr[i] === printedArr[j].weather){
-          sortArr[i] = printedArr[j];
-          printedArr.splice(j, 1);
-          break;
-      }
-    }
-  }
-  return sortArr;
-}
 
-function sortByTemp(printedArr) {
+function sortBy(printedArr, type) {
   var sortArr = new Array;
   for(var i in printedArr){
-    sortArr.push(printedArr[i].temperature);
+    sortArr.push(printedArr[i][type]);
   }
   sortArr.sort();
-  sortArr.reverse(); //want the highest temperatures first
   for(var i in sortArr){
     for(var j in printedArr){
-      if(sortArr[i] === printedArr[j].temperature){
+      if(sortArr[i] === printedArr[j][type]){
           sortArr[i] = printedArr[j];
           printedArr.splice(j, 1);
           break;
