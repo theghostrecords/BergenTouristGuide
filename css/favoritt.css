@@ -47,7 +47,7 @@ td {
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
     #content {
-        margin-top: 375px;
+        margin-top: 450px;
         flex-direction: column;
     }
     #favoriteBox {

@@ -39,7 +39,7 @@ input[type="text"] {
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   #forecast {
-    margin-top: 375px;
+    margin-top: 450px;
   }
   td,
   th {

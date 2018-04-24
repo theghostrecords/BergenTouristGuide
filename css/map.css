@@ -107,7 +107,7 @@ h3 {
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   #map {
-    margin-top: 200px;
+    margin-top: 300px;
   }
 
   #searchBox h3 {
@@ -135,7 +135,7 @@ h3 {
     width: 15%;
     float: none;
   }
-  
+
   #advancedSearch input[type="checkbox"] {
     transform: scale(3);
     margin: 1%;
