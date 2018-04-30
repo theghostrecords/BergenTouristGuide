@@ -23,6 +23,7 @@ function readJSON(url, useCase) {
   });
 }
 
+var tryCounter = 10;
 // Forklar hvorfor denne finnes
 function scan(url, useCase) {
   var promise = readJSON(url);
@@ -42,7 +43,16 @@ function scan(url, useCase) {
       }
     })
     .catch(function (reason) {
-      console.log(reason); // legg inn feilmelding
+      if (tryCounter-- <= 0) {
+        var errorDiv = document.getElementById('errorMsg');
+        var h3 = document.createElement('h3');
+        h3.id = "errorMsg";
+        h3.appendChild(document.createTextNode("Kunne ikke laste ned datasettet"));
+        errorDiv.appendChild(h3);
+        return null;
+      }
+      console.log("Kunne ikke laste datasett: " + reason); // legg inn feilmelding
+      scan(url, useCase);
     });
 }
 

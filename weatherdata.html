@@ -50,20 +50,20 @@
   <div id="forecast">
     <div onchange="findChosen()">
       <select id="sort" name="sort">
-      <option disabled selected value>Sorter etter</option>
-      <option>Tid reversert</option>
-      <option>Temperatur</option>
-      <option>Temperatur reversert</option>
-      <option>Værtype alfabetisk</option>
-      <option>Værtype alfabetisk reversert</option>
-      <option>Reset</option>
-    </select>
+        <option disabled selected value>Sorter etter</option>
+        <option>Tid reversert</option>
+        <option>Temperatur</option>
+        <option>Temperatur reversert</option>
+        <option>Værtype alfabetisk</option>
+        <option>Værtype alfabetisk reversert</option>
+        <option>Reset</option>
+      </select>
       <select id="weather" name="weather">
-      <option disabled selected value>Velg vær</option>
-    </select>
+        <option disabled selected value>Velg vær</option>
+      </select>
       <select id="date" name="date">
-      <option disabled selected value>Velg dato</option>
-    </select>
+        <option disabled selected value>Velg dato</option>
+      </select>
       <input type="text" id="temperature" placeholder="Varmere enn...">
     </div>
     <h3>Værvarsel de neste tre dagene i Bergen (Time for time)</h3>
@@ -79,9 +79,12 @@
       <tbody id="table">
       </tbody>
     </table>
+    <div id="errorMsg"></div>
     <div id="info"> Værvarsel hentet fra
       <a href="https://www.met.no/frie-meteorologiske-data/frie-meteorologiske-data">meterologisk institutt.</a>
-      <div><a href="https://api.met.no/weatherapi/locationforecastlts/1.3/?lat=60.397076&lon=5.324383">Link til værvarsel i XML format.</a></div>
+      <div>
+        <a href="https://api.met.no/weatherapi/locationforecastlts/1.3/?lat=60.397076&lon=5.324383">Link til værvarsel i XML format.</a>
+      </div>
     </div>
 
 </body>

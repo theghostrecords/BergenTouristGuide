@@ -84,6 +84,10 @@ body {
   transform-origin: 0;
 }
 
+#errorMsg h3 {
+  width: 100%;
+}
+
 /*By Øyvind Skeie Liland*/
 
 @media (max-width: 600px) {

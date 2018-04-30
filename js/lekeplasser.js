@@ -8,24 +8,10 @@ function initLekeplassArr(json) {
     for (var entry in json.entries[i]) {
       var value = json.entries[i][entry];
       arr.push(keyValue(entry, value));
-      if(entry === "navn")
+      if (entry === "navn")
         addToList(value);
     }
     lekeplassArr.push(arr);
   }
   initMap(lekeplassArr);
-  initFavOptions();
-}
-
-function initFavOptions() {
-  var select = document.getElementById('favorite');
-  for (var l in lekeplassArr) {
-    var opt = document.createElement('option');
-    for (var entry in lekeplassArr[l]) {
-      if (lekeplassArr[l][entry].key === "navn") {
-        opt.appendChild(document.createTextNode(lekeplassArr[l][entry].value))
-      }
-    }
-    select.appendChild(opt)
-  }
 }
