@@ -1,7 +1,7 @@
 var playgroundArr = new Array;
 var markers = new Array;
 
-// Initialize lekeplass Array from JSON file
+// Initialize Playground Array from JSON file
 function initPlaygroundArr(json) {
   for (var i = 0; i < json.entries.length; i++) {
     var arr = new Array;
