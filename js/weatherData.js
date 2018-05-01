@@ -7,34 +7,34 @@ function initWeatherDataArr(xml) {
   // Response needs to be parsed to be manipulated
   parser = new DOMParser();
   xml = parser.parseFromString(xml, "text/xml");
-
-  forecastArr = new Array;
   var time = xml.getElementsByTagName("time");
 
-  // There are 5 time-nodes per hour of the day in the xml-document
+  /*There are 5 time-nodes per hour of the day in the xml-document,
+    therefore we skip 4 indicies each iteration + 1 inside the loop */
   for (var i = 0; i < time.length; i = i + 4) {
     var timeOfDay = time[i].getAttribute("to");
     var d = timeOfDay.split("T")[0];
     var date = new Date(d);
     timeOfDay = timeOfDay.split("T")[1].split(":")[0] + ".00";
 
+    /*the xml document has lots of forecasts "from x to y" but we only want
+      the forecast for every hour (when "from x === to y")*/
     if (time[i].getAttribute("from") === time[i].getAttribute("to")) {
       var temperature = time[i].childNodes[1].childNodes[1].getAttribute("value");
-      i++; //Short weather explanation is on next time-node
+      i++; //The "Short weather explanation" is on the next time-node
       var weather = time[i].childNodes[1].childNodes[3].getAttribute("id");
       if (weather === "TTT")
         break;
       forecastArr.push(forecast(temperature, weather, timeOfDay, date.toDateString().substring(4)));
     }
-    i = i - 3;
   }
-
+  console.log(forecastArr);
   writeForecast(forecastArr);
   initWeatherOptions();
   initDateOptions();
 }
 
-// Write the table with the weatherforecast
+//Function to write the table with the weatherforecast
 function writeForecast(array) {
   for (var i = 0; i < array.length; i++) {
     var list = document.getElementById("table");
@@ -59,7 +59,7 @@ function writeForecast(array) {
   }
 }
 
-// Initialize the select-weather box with options
+//Initialize the select-weather box with the given options
 function initWeatherOptions() {
   var selected = document.getElementById('weather');
   for (var i in forecastArr) {
@@ -77,7 +77,7 @@ function initWeatherOptions() {
   selected.appendChild(reset);
 }
 
-// Initialize the select-date box with options
+//Initialize the select-date box with the given options
 function initDateOptions() {
   var selected = document.getElementById('date');
   for (var i in forecastArr) {
@@ -95,10 +95,10 @@ function initDateOptions() {
   selected.appendChild(reset);
 }
 
-// Find the chosen traits and write a new forecast
+//Find the chosen traits and write a new forecast
 function findChosen() {
   document.getElementById('table').innerHTML = "";
-  var printedArr = new Array;
+  var printedArr = new Array; //array to be printed into table
   var chosenWeather = document.getElementById('weather').value;
   var chosenDate = document.getElementById('date').value;
   var chosenTemp = document.getElementById('temperature').value;
@@ -114,6 +114,12 @@ function findChosen() {
     document.getElementById('sort').selectedIndex = 0;
     chosenSort = '';
   }
+  //Split up functionality that manipulated printedArr for readability
+  writeForecast(sortTable(chosenSort, showChosenTrait(chosenWeather, chosenDate, chosenTemp, printedArr)));
+}
+
+//Checks whether given trait should be added to the array, to later be printed to the table
+function showChosenTrait(chosenWeather, chosenDate, chosenTemp, printedArr) {
   for (var i in forecastArr) {
     if (forecastArr[i].date === chosenDate && forecastArr[i].weather === "" && Number(forecastArr[i].temperature) === "")
       printedArr.push(forecastArr[i]);
@@ -130,23 +136,35 @@ function findChosen() {
     else if (forecastArr[i].date === chosenDate && forecastArr[i].weather === chosenWeather && Number(forecastArr[i].temperature) > chosenTemp)
       printedArr.push(forecastArr[i]);
   }
+  return printedArr;
+}
 
-  if (chosenSort === "Tid reversert")
+//Calls sortBy according to given sort-type and reverses array if asked for
+function sortTable(chosenSort, printedArr) {
+  if (chosenSort === "Tid reversert") {
     printedArr.reverse();
-  else if (chosenSort === "Værtype alfabetisk")
+  } else if (chosenSort === "Værtype alfabetisk") {
     printedArr = sortBy(printedArr, "weather")
-  else if (chosenSort === "Værtype alfabetisk reversert") {
+  } else if (chosenSort === "Værtype alfabetisk reversert") {
     printedArr = sortBy(printedArr, "weather");
     printedArr.reverse();
   } else if (chosenSort === "Temperatur") {
     printedArr = sortBy(printedArr, "temperature")
-    printedArr.reverse();
-  } else if (chosenSort === "Temperatur reversert")
+    printedArr.reverse(); //Temperature is sorted small to big by default, but we wanted the opposite
+  } else if (chosenSort === "Temperatur reversert") {
     printedArr = sortBy(printedArr, "temperature");
-  writeForecast(printedArr);
+  }
+  return printedArr;
 }
 
-
+/*This function sorts the given array according to the selected sorting type
+ * The way the function works is that it extracts the chosen type from the given array (printedArr)
+ * into a new array (sortArr), and then sorts that array with .sort().
+ * Then, in the nested for loops, the function matches each object in sortArr with its first instance
+ * in printedArr, then adds that object to sortArr and removes it from printedArr.
+ * This way the new array is both sorted by the wanted type (by .sort()) and by time (first instance in prinetdArr(), because
+ * printedArr is already sorted by time by default)
+ */
 function sortBy(printedArr, type) {
   var sortArr = new Array;
   for (var i in printedArr) {
@@ -166,7 +184,7 @@ function sortBy(printedArr, type) {
 }
 
 
-// Forecast-object, containing temperature, weather, time, and date
+//Forecast-object that containins temperature, weather, time, and date
 function forecast(te, w, ti, d) {
   return {
     temperature: te,
