@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Sofia");
+@font-face {
+  font-family: "sofia";
+  src: url("../font/Sofia-Regular.ttf");
+}
+
 body {
   background: #303030;
   display: flex;
