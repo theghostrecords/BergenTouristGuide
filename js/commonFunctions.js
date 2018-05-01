@@ -39,7 +39,7 @@ function scan(url, useCase) {
         else if (useCase === "favorite")
           initFavArr(response);
         else if (useCase === "otherSet")
-          initClosestToiletsList(response);
+          initClosestToiletsTable(response);
       }
     })
     .catch(function (reason) {
