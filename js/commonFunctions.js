@@ -1,4 +1,4 @@
-// Send GET-request for dataset (JSON/XML-format)
+// Send GET-request for dataset (JSON/XML-format) and return a Promise
 function readJSON(url, useCase) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
@@ -23,8 +23,8 @@ function readJSON(url, useCase) {
   });
 }
 
-var tryCounter = 10;
-// Forklar hvorfor denne finnes
+var tryCounter = 10; // Number of tries before error message is added to DOM
+// Retrieves data from url, if success call the initFunction if not try again or add Error-message
 function scan(url, useCase) {
   var promise = readJSON(url);
   promise.then(function (response) {

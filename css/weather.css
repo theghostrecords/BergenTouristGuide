@@ -1,5 +1,3 @@
-/*Document by Joakim Moss Grutle */
-
 #forecast {
   margin-top: 150px;
   width: 100%;
@@ -12,6 +10,8 @@
 #info {
   margin-top: 50px;
   font-size: 15px;
+  color: white;
+  text-align: center;
 }
 
 a {

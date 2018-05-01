@@ -1,4 +1,3 @@
-//document by Joakim Moss Grutle
 var forecastArr = new Array;
 var weatherOptions = new Array;
 var dateOptions = new Array;
@@ -12,7 +11,7 @@ function initWeatherDataArr(xml) {
   forecastArr = new Array;
   var time = xml.getElementsByTagName("time");
 
-  //there are 5 time-nodes per hour of the day in the xml-document
+  // There are 5 time-nodes per hour of the day in the xml-document
   for (var i = 0; i < time.length; i = i + 4) {
     var timeOfDay = time[i].getAttribute("to");
     var d = timeOfDay.split("T")[0];
@@ -35,7 +34,7 @@ function initWeatherDataArr(xml) {
   initDateOptions();
 }
 
-// function to write the table with the weatherforecast
+// Write the table with the weatherforecast
 function writeForecast(array) {
   for (var i = 0; i < array.length; i++) {
     var list = document.getElementById("table");
@@ -60,7 +59,7 @@ function writeForecast(array) {
   }
 }
 
-//initialize the select-weather box with options
+// Initialize the select-weather box with options
 function initWeatherOptions() {
   var selected = document.getElementById('weather');
   for (var i in forecastArr) {
@@ -78,7 +77,7 @@ function initWeatherOptions() {
   selected.appendChild(reset);
 }
 
-//initialize the select-date box with options
+// Initialize the select-date box with options
 function initDateOptions() {
   var selected = document.getElementById('date');
   for (var i in forecastArr) {
@@ -96,7 +95,7 @@ function initDateOptions() {
   selected.appendChild(reset);
 }
 
-//find the chosen traits and write a new forecast
+// Find the chosen traits and write a new forecast
 function findChosen() {
   document.getElementById('table').innerHTML = "";
   var printedArr = new Array;
@@ -167,7 +166,7 @@ function sortBy(printedArr, type) {
 }
 
 
-//forecast-object, containing temperature, weather, time, and date
+// Forecast-object, containing temperature, weather, time, and date
 function forecast(te, w, ti, d) {
   return {
     temperature: te,

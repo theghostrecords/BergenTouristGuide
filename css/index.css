@@ -1,5 +1,3 @@
-/*Document by Øyvind Skeie Liland */
-
 #head-wrapper {
   width: 100%;
 }
@@ -44,8 +42,6 @@ img {
   padding-right: 15px;
 }
 
-/*Added by Joakim Moss Grutle*/
-
 @media (max-width: 675px) {
   .index-content h4 {
     font-size: 1.5625em;
@@ -54,8 +50,6 @@ img {
     font-size: 0.75em;
   }
 }
-
-/*Added by Øyvind Skeie Liland*/
 
 @media (max-width: 900px) {
   .index-content h4 {

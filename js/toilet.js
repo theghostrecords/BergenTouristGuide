@@ -1,14 +1,14 @@
-/*Document by Joakim Moss Grutle*/
-var toiletArr = new Array; // array with kayvalue-objects, to keep track of the toilets
+var toiletArr = new Array; // Array with kayvalue-objects, to keep track of the toilets
 var markers = new Array;
 var advancedSearchRegex = /\?(([a-zA-Z]+=[a-zA-Z0-9\.\+(%3A)]*&*)+)/;
 var freeSearchRegex = /freeSearch=(((([a-zA-ZæøåÆØÅ]+(%3A)[a-zA-Z0-9æøåÆØÅ\.]+)|(([a-zA-ZæøåÆØÅ]*)*))\+*)*)&/
-// matching regex with url, splitting the values on "+" or "&"
+// Matching regex with url, splitting the values on "+" or "&"
 var freeSearchArray = decodeURI(location.href).match(freeSearchRegex);
 var freeSearchArray = freeSearchArray[1].split("+");
 var advancedSearchArray = location.href.match(advancedSearchRegex);
 var advancedSearchArray = advancedSearchArray[1].split("&");
-var searchCriteria; //searchCriteria-object that contains information about whether criteria should be checked or not
+// SearchCriteria-object that contains information about whether criteria should be checked or not
+var searchCriteria;
 
 
 //Get a given entry from the toiletArr array
@@ -20,19 +20,19 @@ function getEntry(s, toilet) {
   }
 }
 
-//Create searchCriteria object, find out which toilets to print
+// Create searchCriteria object, find out which toilets to print
 function advancedFreeSearch() {
-  //readJSON();
-  searchCriteria = searchCrit(); // initialize searchCriteria-object with all false values
+  // Initialize searchCriteria-object with all false values
+  searchCriteria = searchCrit();
 
-  // check if freeSearch isn't empty, then run searchMatching() on the corresponding
-  // array to define the values in the searchCriteria-object
+  /* Check if freeSearch isn't empty, then run searchMatching() on the corresponding
+     array to define the values in the searchCriteria-object */
   if (freeSearchArray !== null) {
     searchMatching(freeSearchArray, "%3A", searchCriteria);
   }
   searchMatching(advancedSearchArray, "=", searchCriteria);
 
-  // check if any criteria in searchCriteria has been set to something other than false
+  // Check if any criteria in searchCriteria has been set to something other than false
   var advFrSearch = false;
   for (crit in searchCriteria) {
     if (searchCriteria[crit] !== false && searchCriteria[crit] !== undefined) {
@@ -54,7 +54,7 @@ function advancedFreeSearch() {
   initMap(toiletArr);
 }
 
-//function used to print toilets to the numeric list
+// Function used to print toilets to the numeric list
 function printToilets() {
   for (toilet in toiletArr) {
     for (entry in toiletArr[toilet]) {
@@ -64,7 +64,7 @@ function printToilets() {
   }
 }
 
-//Function that returns an object for searching, everything set to false by default
+// Function that returns an object for searching, everything set to false by default
 function searchCrit() {
   return {
     herre: false,
@@ -82,7 +82,7 @@ function searchCrit() {
   };
 }
 
-//return false if toilet should not be added to toiletArr
+// Return false if toilet should not be added to toiletArr
 function matchToiletWithCriteria(toilet) {
   var listToilet = true;
   var placeCounter = 0;
@@ -90,7 +90,7 @@ function matchToiletWithCriteria(toilet) {
     if (searchCriteria[crit] !== false) {
 
       var entry = getEntry(crit, toilet).toLowerCase(); // toLowerCase makes everything easier to match with
-      //check if entry is null, undefined or empty, unless the criteria is price
+      //Check if entry is null, undefined or empty, unless the criteria is price
       if (crit !== "pris" && (entry === undefined || entry === "" || entry === "null")) {
         listToilet = false;
       }
@@ -100,21 +100,21 @@ function matchToiletWithCriteria(toilet) {
           Number(searchCriteria[crit].split(".")[0]) >= Number(entry.split("-")[1].split(".")[0].trim()))
           listToilet = false;
       }
-      // If kjønn=herre is a criteria, but herre === null, check if pissoir_only === '1'
+      // If kjønn:herre is a criteria, but herre === null, check if pissoir_only === '1'
       if (crit === "herre" && entry === "null") {
         entry = getEntry("pissoir_only", toilet);
         if (entry === '1') {
           listToilet = true;
         }
       }
-      //if neither place, adresse nor plassering matches, set given toilet to false
+      // If neither place, adresse nor plassering matches, set given toilet to false
       if (!entry.match((searchCriteria[crit])) && (crit === "plassering" || crit === "adresse" || crit === "place")) {
         placeCounter++;
         if (placeCounter === 3) {
           listToilet = false;
         }
       }
-      //check if price is lower than wanted price
+      // Check if price is lower than wanted price
       if (crit === "pris") {
         if (Number(searchCriteria[crit]) < Number(entry)) {
           listToilet = false;
@@ -125,10 +125,10 @@ function matchToiletWithCriteria(toilet) {
   return listToilet;
 }
 
-// use information from the two different regex-expressions to define the values in the searchCriteria object
+// Use information from the two different regex-expressions to define the values in the searchCriteria object
 function searchMatching(array, splitCharacter, searchCriteria) {
   for (i in array) {
-    // look for address or placename in first value of freeSearch
+    // Look for address or placename in first value of freeSearch
     if (splitCharacter === "%3A" && i == 0 && array[i].split(splitCharacter).length < 2) {
       var key = "plassering";
       var value = array[0].toLowerCase();
@@ -142,8 +142,8 @@ function searchMatching(array, splitCharacter, searchCriteria) {
   }
 }
 
-//From here and down - By Øyvind Skeie liland
-// add the different search-values to the searchCriteria-object
+// From here and down - By Øyvind Skeie liland
+// Add the different search-values to the searchCriteria-object
 function addCriteria(key, value) {
   if ((key === "kjonn" || key === "kjønn") && value === "herre") {
     searchCriteria.herre = true;
@@ -211,7 +211,7 @@ function initToiletArr(json) {
   advancedFreeSearch();
 }
 
-var clicked = false; // keep track of hidden/visible advancedSearch options
+var clicked = false; // Keep track of hidden/visible advancedSearch options
 // Hide/Show advancedSearch
 function hideShowAdvSearch() {
   if (clicked) {
@@ -222,7 +222,3 @@ function hideShowAdvSearch() {
     document.getElementById('advancedSearch').style.display = 'none';
   }
 }
-
-console.log("Ran map_script.js");
-console.log(advancedSearchArray);
-console.log(freeSearchArray);
