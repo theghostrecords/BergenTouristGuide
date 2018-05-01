@@ -170,7 +170,11 @@ function sortBy(printedArr, type) {
   for (var i in printedArr) {
     sortArr.push(printedArr[i][type]);
   }
-  sortArr.sort();
+  if (type === "temperature")
+    sortArr.sort((a, b) => a - b);
+  else {
+    sortArr.sort()
+  }
   for (var i in sortArr) {
     for (var j in printedArr) {
       if (sortArr[i] === printedArr[j][type]) {
