@@ -28,15 +28,15 @@ var tryCounter = 10;
 function scan(url, useCase) {
   var promise = readJSON(url);
   promise.then(function (response) {
-      if (useCase === "værdata")
-        initVærDataArr(response);
+      if (useCase === "weatherData")
+        initWeatherDataArr(response);
       else {
         var response = JSON.parse(response);
         if (useCase === "toilets")
           initToiletArr(response);
-        else if (useCase === "lekeplasser")
-          initLekeplassArr(response);
-        else if (useCase === "favoritt")
+        else if (useCase === "playground")
+          initPlaygroundArr(response);
+        else if (useCase === "favorite")
           initFavArr(response);
         else if (useCase === "otherSet")
           initClosestToiletsList(response);
@@ -51,7 +51,7 @@ function scan(url, useCase) {
         errorDiv.appendChild(h3);
         return null;
       }
-      console.log("Kunne ikke laste datasett: " + reason); // legg inn feilmelding
+      console.log("Kunne ikke laste datasett: " + reason);
       scan(url, useCase);
     });
 }
@@ -110,30 +110,4 @@ function keyValue(k, v) {
     key: k,
     value: v
   };
-}
-
-function coordinate(lng, lat) {
-  return {
-    longitude: Number(lng),
-    latitude: Number(lat),
-  };
-}
-
-/* Function that takes two coordinates as parameters and calculates the difference between them
-   The calculation is done by using the Haversine formula
-*/
-function calculateDistance(cord1, cord2) {
-  var earthR = 6372.8;
-  var lat1 = cord1.latitude;
-  var lat2 = cord2.latitude;
-  var distLat = toRadians(cord1.latitude - cord2.latitude);
-  var distLng = toRadians(cord1.longitude - cord2.longitude);;
-
-  var n = Math.pow(Math.sin(distLat / 2), 2) + Math.pow(Math.sin(distLng / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
-  var k = 2 * Math.asin(Math.sqrt(n));
-  return earthR * k;
-}
-
-function toRadians(deg) {
-  return deg * (Math.PI / 180);
 }

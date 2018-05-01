@@ -5,15 +5,15 @@
 <head>
   <title> Lekeplasser i Bergen </title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
-  <link rel="stylesheet" href="css/map.css" type="text/css" />
-  <script src="js/jsonFunc.js"></script>
-  <script src="js/lekeplasser.js"></script>
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/toilet.css" type="text/css" />
+  <script src="js/commonFunctions.js"></script>
+  <script src="js/playground.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxV8dHcnjxe9dmWL-36hwvo0pX7OHcWLg&callback=initMap">
   </script>
 </head>
 
-<body onload="scan('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'lekeplasser');">
+<body onload="scan('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'playground');">
   <div id="head-wrapper">
     <div class="header-container">
       <h1 class="centerText" onclick="location.href='index.html'">Lekeplasser i Bergen</h1>
@@ -29,15 +29,15 @@
           </a>
         </li>
         <li>
-          <a href="map.html"> Toaletter </a>
+          <a href="toilet.html"> Toaletter </a>
         </li>
         <li>
-          <a href="lekeplasser.html">
+          <a href="playground.html">
             Lekeplasser
           </a>
         </li>
         <li>
-          <a href="minFavorittLekeplass.html">
+          <a href="favoritePlayground.html">
             Favorittlekeplass
           </a>
         </li>

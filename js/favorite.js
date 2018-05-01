@@ -105,3 +105,29 @@ function addToOtherSetList(name, distance) {
 function clearList() {
     document.getElementById('closestTable').innerHTML = "";
 }
+
+function coordinate(lng, lat) {
+    return {
+      longitude: Number(lng),
+      latitude: Number(lat),
+    };
+  }
+  
+  /* Function that takes two coordinates as parameters and calculates the difference between them
+     The calculation is done by using the Haversine formula
+  */
+  function calculateDistance(cord1, cord2) {
+    var earthR = 6372.8;
+    var lat1 = cord1.latitude;
+    var lat2 = cord2.latitude;
+    var distLat = toRadians(cord1.latitude - cord2.latitude);
+    var distLng = toRadians(cord1.longitude - cord2.longitude);;
+  
+    var n = Math.pow(Math.sin(distLat / 2), 2) + Math.pow(Math.sin(distLng / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
+    var k = 2 * Math.asin(Math.sqrt(n));
+    return earthR * k;
+  }
+  
+  function toRadians(deg) {
+    return deg * (Math.PI / 180);
+  }

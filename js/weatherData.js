@@ -4,7 +4,7 @@ var weatherOptions = new Array;
 var dateOptions = new Array;
 
 // Initialize weatherdata array from XML file
-function initVærDataArr(xml) {
+function initWeatherDataArr(xml) {
   // Response needs to be parsed to be manipulated
   parser = new DOMParser();
   xml = parser.parseFromString(xml, "text/xml");

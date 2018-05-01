@@ -1,8 +1,8 @@
-var lekeplassArr = new Array;
+var playgroundArr = new Array;
 var markers = new Array;
 
 // Initialize lekeplass Array from JSON file
-function initLekeplassArr(json) {
+function initPlaygroundArr(json) {
   for (var i = 0; i < json.entries.length; i++) {
     var arr = new Array;
     for (var entry in json.entries[i]) {
@@ -11,7 +11,7 @@ function initLekeplassArr(json) {
       if (entry === "navn")
         addToList(value);
     }
-    lekeplassArr.push(arr);
+    playgroundArr.push(arr);
   }
-  initMap(lekeplassArr);
+  initMap(playgroundArr);
 }

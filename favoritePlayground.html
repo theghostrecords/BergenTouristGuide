@@ -5,13 +5,13 @@
 <head>
   <title> Min Favorittlekeplass </title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
-  <link rel="stylesheet" href="css/favoritt.css" type="text/css" />
-  <script src="js/jsonFunc.js"></script>
-  <script src="js/favoritt.js"></script>
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/favorite.css" type="text/css" />
+  <script src="js/commonFunctions.js"></script>
+  <script src="js/favorite.js"></script>
 </head>
 
-<body onload="scan('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'favoritt');">
+<body onload="scan('https://hotell.difi.no/api/json/bergen/lekeplasser?', 'favorite');">
   <div id="head-wrapper">
     <div class="header-container">
       <h1 class="centerText" onclick="location.href='index.html'">Min Favorittlekeplass</h1>
@@ -27,15 +27,15 @@
           </a>
         </li>
         <li>
-          <a href="map.html"> Toaletter </a>
+          <a href="toilet.html"> Toaletter </a>
         </li>
         <li>
-          <a href="lekeplasser.html">
+          <a href="playground.html">
             Lekeplasser
           </a>
         </li>
         <li>
-          <a href="minFavorittLekeplass.html">
+          <a href="favoritePlayground.html">
             Favorittlekeplass
           </a>
         </li>
