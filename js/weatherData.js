@@ -150,9 +150,9 @@ function sortTable(chosenSort, printedArr) {
     printedArr.reverse();
   } else if (chosenSort === "Temperatur") {
     printedArr = sortBy(printedArr, "temperature")
-    printedArr.reverse(); //Temperature is sorted small to big by default, but we wanted the opposite
   } else if (chosenSort === "Temperatur reversert") {
     printedArr = sortBy(printedArr, "temperature");
+    printedArr.reverse();
   }
   return printedArr;
 }
@@ -170,8 +170,8 @@ function sortBy(printedArr, type) {
   for (var i in printedArr) {
     sortArr.push(printedArr[i][type]);
   }
-  if (type === "temperature") // Had to specify how to sort the temp, or else it would not sort properly for some reason
-    sortArr.sort((a, b) => a - b);
+  if (type === "temperature") // sort the other way around
+    sortArr.sort((a, b) => b - a);
   else
     sortArr.sort()
   for (var i in sortArr) {

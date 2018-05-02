@@ -1,5 +1,5 @@
 // Send GET-request for dataset (JSON/XML-format) and return a Promise
-function readJSON(url, useCase) {
+function readDataSet(url, useCase) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
@@ -26,7 +26,7 @@ function readJSON(url, useCase) {
 var tryCounter = 10; // Number of tries before error message is added to DOM
 // Retrieves data from url, if success call the initFunction if not try again or add Error-message
 function scan(url, useCase) {
-  var promise = readJSON(url);
+  var promise = readDataSet(url);
   promise.then(function (response) {
       if (useCase === "weatherData")
         initWeatherDataArr(response);

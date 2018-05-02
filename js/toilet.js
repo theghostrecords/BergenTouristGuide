@@ -142,7 +142,6 @@ function searchMatching(array, splitCharacter, searchCriteria) {
   }
 }
 
-// From here and down - By Øyvind Skeie liland
 // Add the different search-values to the searchCriteria-object
 function addCriteria(key, value) {
   if ((key === "kjonn" || key === "kjønn") && value === "herre") {
