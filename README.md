@@ -1,6 +1,5 @@
-# INFO134 - Universitetet i Bergen
-Obligatorisk semesteroppgave - Klientprogrammering
+# INFO134 - University of Bergen
+Two person group project for the class Client programming.  
 
-Link til nettside:
+Link to deployed website:
 https://joakimgrutle.github.io <br>
-https://theghostrecords.github.io/INFO134/
